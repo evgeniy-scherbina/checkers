@@ -38,7 +38,7 @@ func (storedGame StoredGame) GetWinnerAddress() (address sdk.AccAddress, found b
 	return storedGame.GetPlayerAddress(storedGame.Winner)
 }
 
-func (storedGame *StoredGame) GetDeadlineAsTime() (deadline time.Time, err error) {
+func (storedGame StoredGame) GetDeadlineAsTime() (deadline time.Time, err error) {
 	deadline, errDeadline := time.Parse(DeadlineLayout, storedGame.Deadline)
 	return deadline, sdkerrors.Wrapf(errDeadline, ErrInvalidDeadline.Error(), storedGame.Deadline)
 }
