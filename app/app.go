@@ -103,6 +103,9 @@ import (
 	checkersmodule "github.com/alice/checkers/x/checkers"
 	checkersmodulekeeper "github.com/alice/checkers/x/checkers/keeper"
 	checkersmoduletypes "github.com/alice/checkers/x/checkers/types"
+	tictactoemodule "github.com/alice/checkers/x/tictactoe"
+	tictactoemodulekeeper "github.com/alice/checkers/x/tictactoe/keeper"
+	tictactoemoduletypes "github.com/alice/checkers/x/tictactoe/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -158,6 +161,7 @@ var (
 		vesting.AppModuleBasic{},
 		monitoringp.AppModuleBasic{},
 		checkersmodule.AppModuleBasic{},
+		tictactoemodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -232,6 +236,8 @@ type App struct {
 	ScopedMonitoringKeeper capabilitykeeper.ScopedKeeper
 
 	CheckersKeeper checkersmodulekeeper.Keeper
+
+	TictactoeKeeper tictactoemodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -269,6 +275,7 @@ func New(
 		govtypes.StoreKey, paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey,
 		evidencetypes.StoreKey, ibctransfertypes.StoreKey, capabilitytypes.StoreKey, monitoringptypes.StoreKey,
 		checkersmoduletypes.StoreKey,
+		tictactoemoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -399,6 +406,14 @@ func New(
 	)
 	checkersModule := checkersmodule.NewAppModule(appCodec, app.CheckersKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.TictactoeKeeper = *tictactoemodulekeeper.NewKeeper(
+		appCodec,
+		keys[tictactoemoduletypes.StoreKey],
+		keys[tictactoemoduletypes.MemStoreKey],
+		app.GetSubspace(tictactoemoduletypes.ModuleName),
+	)
+	tictactoeModule := tictactoemodule.NewAppModule(appCodec, app.TictactoeKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -441,6 +456,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		checkersModule,
+		tictactoeModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -469,6 +485,7 @@ func New(
 		paramstypes.ModuleName,
 		monitoringptypes.ModuleName,
 		checkersmoduletypes.ModuleName,
+		tictactoemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -493,6 +510,7 @@ func New(
 		ibctransfertypes.ModuleName,
 		monitoringptypes.ModuleName,
 		checkersmoduletypes.ModuleName,
+		tictactoemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -522,6 +540,7 @@ func New(
 		feegrant.ModuleName,
 		monitoringptypes.ModuleName,
 		checkersmoduletypes.ModuleName,
+		tictactoemoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -547,6 +566,7 @@ func New(
 		transferModule,
 		monitoringModule,
 		checkersModule,
+		tictactoeModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -737,6 +757,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(monitoringptypes.ModuleName)
 	paramsKeeper.Subspace(checkersmoduletypes.ModuleName)
+	paramsKeeper.Subspace(tictactoemoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
