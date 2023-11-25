@@ -30565,6 +30565,11 @@ definitions:
                   "@type": "type.googleapis.com/google.protobuf.Duration",
                   "value": "1.212s"
                 }
+  alice.checkers.tictactoe.MsgCreateGameResponse:
+    type: object
+    properties:
+      gameIndex:
+        type: string
   alice.checkers.tictactoe.Params:
     type: object
     description: Params defines the parameters for the module.
