@@ -1,5 +1,7 @@
 package rules
 
+import "encoding/json"
+
 const (
 	XSymbol         = 'X'
 	OSymbol         = 'O'
@@ -11,12 +13,9 @@ const (
 type Game struct {
 	board    [][]byte
 	nextTurn byte
-
-	xPlayer string
-	yPlayer string
 }
 
-func NewGame(xPlayer, yPlayer string) *Game {
+func NewGame() *Game {
 	board := make([][]byte, N)
 	for i := 0; i < N; i++ {
 		board[i] = make([]byte, N)
@@ -28,9 +27,24 @@ func NewGame(xPlayer, yPlayer string) *Game {
 	return &Game{
 		board:    board,
 		nextTurn: XSymbol,
-		xPlayer:  xPlayer,
-		yPlayer:  yPlayer,
 	}
+}
+
+func (g *Game) Serialize() ([]byte, error) {
+	return json.Marshal(g)
+}
+
+func Deserialize(data []byte) (*Game, error) {
+	var g Game
+	if err := json.Unmarshal(data, &g); err != nil {
+		return nil, err
+	}
+
+	return &g, nil
+}
+
+func (g *Game) NextTurn() byte {
+	return g.nextTurn
 }
 
 func (g *Game) PlayMove(i, j int) {
