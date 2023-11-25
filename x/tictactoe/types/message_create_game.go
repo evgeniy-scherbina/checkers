@@ -43,5 +43,13 @@ func (msg *MsgCreateGame) ValidateBasic() error {
 	if err != nil {
 		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid creator address (%s)", err)
 	}
+	_, err = sdk.AccAddressFromBech32(msg.XPlayer)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid xPlayer address (%s)", err)
+	}
+	_, err = sdk.AccAddressFromBech32(msg.OPlayer)
+	if err != nil {
+		return sdkerrors.Wrapf(sdkerrors.ErrInvalidAddress, "invalid yPlayer address (%s)", err)
+	}
 	return nil
 }

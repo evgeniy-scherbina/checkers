@@ -11,8 +11,8 @@ func (s *StoredGame) XPlayerAddress() (sdk.Address, error) {
 	return addr, nil
 }
 
-func (s *StoredGame) YPlayerAddress() (sdk.Address, error) {
-	addr, err := sdk.AccAddressFromBech32(s.YPlayer)
+func (s *StoredGame) OPlayerAddress() (sdk.Address, error) {
+	addr, err := sdk.AccAddressFromBech32(s.OPlayer)
 	if err != nil {
 		return nil, err
 	}
@@ -24,7 +24,7 @@ func (s *StoredGame) Validate() error {
 	if _, err := s.XPlayerAddress(); err != nil {
 		return err
 	}
-	if _, err := s.YPlayerAddress(); err != nil {
+	if _, err := s.OPlayerAddress(); err != nil {
 		return err
 	}
 

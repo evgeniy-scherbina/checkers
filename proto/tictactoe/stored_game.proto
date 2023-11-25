@@ -8,7 +8,7 @@ message StoredGame {
   string board = 2; 
   string nextTurn = 3; 
   string xPlayer = 4; 
-  string yPlayer = 5; 
+  string oPlayer = 5;
   
 }
 

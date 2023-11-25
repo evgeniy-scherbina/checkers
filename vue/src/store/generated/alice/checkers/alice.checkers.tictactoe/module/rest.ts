@@ -65,7 +65,7 @@ export interface TictactoeStoredGame {
   board?: string;
   nextTurn?: string;
   xPlayer?: string;
-  yPlayer?: string;
+  oPlayer?: string;
 }
 
 export interface TictactoeSystemInfo {

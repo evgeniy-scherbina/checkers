@@ -350,7 +350,7 @@ paths:
                       type: string
                     xPlayer:
                       type: string
-                    yPlayer:
+                    oPlayer:
                       type: string
               pagination:
                 type: object
@@ -477,7 +477,7 @@ paths:
                     type: string
                   xPlayer:
                     type: string
-                  yPlayer:
+                  oPlayer:
                     type: string
         default:
           description: An unexpected error response.
@@ -30589,7 +30589,7 @@ definitions:
               type: string
             xPlayer:
               type: string
-            yPlayer:
+            oPlayer:
               type: string
       pagination:
         type: object
@@ -30630,7 +30630,7 @@ definitions:
             type: string
           xPlayer:
             type: string
-          yPlayer:
+          oPlayer:
             type: string
   alice.checkers.tictactoe.QueryGetSystemInfoResponse:
     type: object
@@ -30659,7 +30659,7 @@ definitions:
         type: string
       xPlayer:
         type: string
-      yPlayer:
+      oPlayer:
         type: string
   alice.checkers.tictactoe.SystemInfo:
     type: object

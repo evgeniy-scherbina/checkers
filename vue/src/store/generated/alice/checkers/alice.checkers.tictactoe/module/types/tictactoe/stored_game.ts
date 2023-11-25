@@ -8,7 +8,7 @@ export interface StoredGame {
   board: string;
   nextTurn: string;
   xPlayer: string;
-  yPlayer: string;
+  oPlayer: string;
 }
 
 const baseStoredGame: object = {
@@ -16,7 +16,7 @@ const baseStoredGame: object = {
   board: "",
   nextTurn: "",
   xPlayer: "",
-  yPlayer: "",
+  oPlayer: "",
 };
 
 export const StoredGame = {
@@ -33,8 +33,8 @@ export const StoredGame = {
     if (message.xPlayer !== "") {
       writer.uint32(34).string(message.xPlayer);
     }
-    if (message.yPlayer !== "") {
-      writer.uint32(42).string(message.yPlayer);
+    if (message.oPlayer !== "") {
+      writer.uint32(42).string(message.oPlayer);
     }
     return writer;
   },
@@ -59,7 +59,7 @@ export const StoredGame = {
           message.xPlayer = reader.string();
           break;
         case 5:
-          message.yPlayer = reader.string();
+          message.oPlayer = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -91,10 +91,10 @@ export const StoredGame = {
     } else {
       message.xPlayer = "";
     }
-    if (object.yPlayer !== undefined && object.yPlayer !== null) {
-      message.yPlayer = String(object.yPlayer);
+    if (object.oPlayer !== undefined && object.oPlayer !== null) {
+      message.oPlayer = String(object.oPlayer);
     } else {
-      message.yPlayer = "";
+      message.oPlayer = "";
     }
     return message;
   },
@@ -105,7 +105,7 @@ export const StoredGame = {
     message.board !== undefined && (obj.board = message.board);
     message.nextTurn !== undefined && (obj.nextTurn = message.nextTurn);
     message.xPlayer !== undefined && (obj.xPlayer = message.xPlayer);
-    message.yPlayer !== undefined && (obj.yPlayer = message.yPlayer);
+    message.oPlayer !== undefined && (obj.oPlayer = message.oPlayer);
     return obj;
   },
 
@@ -131,10 +131,10 @@ export const StoredGame = {
     } else {
       message.xPlayer = "";
     }
-    if (object.yPlayer !== undefined && object.yPlayer !== null) {
-      message.yPlayer = object.yPlayer;
+    if (object.oPlayer !== undefined && object.oPlayer !== null) {
+      message.oPlayer = object.oPlayer;
     } else {
-      message.yPlayer = "";
+      message.oPlayer = "";
     }
     return message;
   },

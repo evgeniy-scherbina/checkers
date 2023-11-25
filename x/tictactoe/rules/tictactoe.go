@@ -34,6 +34,15 @@ func (g *Game) Serialize() ([]byte, error) {
 	return json.Marshal(g)
 }
 
+func (g *Game) MustSerialize() []byte {
+	data, err := g.Serialize()
+	if err != nil {
+		panic(err)
+	}
+
+	return data
+}
+
 func Deserialize(data []byte) (*Game, error) {
 	var g Game
 	if err := json.Unmarshal(data, &g); err != nil {
