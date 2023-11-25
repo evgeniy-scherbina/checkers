@@ -9,8 +9,8 @@ const (
 )
 
 type Game struct {
-	board          [][]byte
-	nextTurnPlayer byte
+	board    [][]byte
+	nextTurn byte
 
 	xPlayer string
 	yPlayer string
@@ -26,10 +26,10 @@ func NewGame(xPlayer, yPlayer string) *Game {
 	}
 
 	return &Game{
-		board:          board,
-		nextTurnPlayer: XSymbol,
-		xPlayer:        xPlayer,
-		yPlayer:        yPlayer,
+		board:    board,
+		nextTurn: XSymbol,
+		xPlayer:  xPlayer,
+		yPlayer:  yPlayer,
 	}
 }
 

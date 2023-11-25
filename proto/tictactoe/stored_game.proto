@@ -1,0 +1,14 @@
+syntax = "proto3";
+package alice.checkers.tictactoe;
+
+option go_package = "github.com/alice/checkers/x/tictactoe/types";
+
+message StoredGame {
+  string index = 1; 
+  string board = 2; 
+  string nextTurn = 3; 
+  string xPlayer = 4; 
+  string yPlayer = 5; 
+  
+}
+

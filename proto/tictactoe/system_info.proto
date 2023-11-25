@@ -1,0 +1,9 @@
+syntax = "proto3";
+package alice.checkers.tictactoe;
+
+option go_package = "github.com/alice/checkers/x/tictactoe/types";
+
+message SystemInfo {
+  uint64 nextId = 1; 
+  
+}
