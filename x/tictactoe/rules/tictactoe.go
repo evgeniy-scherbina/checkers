@@ -11,9 +11,12 @@ const (
 type Game struct {
 	board          [][]byte
 	nextTurnPlayer byte
+
+	xPlayer string
+	yPlayer string
 }
 
-func NewGame() *Game {
+func NewGame(xPlayer, yPlayer string) *Game {
 	board := make([][]byte, N)
 	for i := 0; i < N; i++ {
 		board[i] = make([]byte, N)
@@ -25,6 +28,8 @@ func NewGame() *Game {
 	return &Game{
 		board:          board,
 		nextTurnPlayer: XSymbol,
+		xPlayer:        xPlayer,
+		yPlayer:        yPlayer,
 	}
 }
 
