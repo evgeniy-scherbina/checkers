@@ -13,11 +13,23 @@ export interface BiggernumGames {
   index?: string;
   player1?: string;
   player2?: string;
+
+  /** @format uint64 */
+  move1?: string;
+
+  /** @format uint64 */
+  move2?: string;
+
+  /** @format uint64 */
+  playerToMove?: string;
+  winner?: string;
 }
 
 export interface BiggernumMsgCreateGameResponse {
   gameId?: string;
 }
+
+export type BiggernumMsgPlayMoveResponse = object;
 
 /**
  * Params defines the parameters for the module.

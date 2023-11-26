@@ -25,6 +25,17 @@ paths:
                       type: string
                     player2:
                       type: string
+                    move1:
+                      type: string
+                      format: uint64
+                    move2:
+                      type: string
+                      format: uint64
+                    playerToMove:
+                      type: string
+                      format: uint64
+                    winner:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -147,6 +158,17 @@ paths:
                   player1:
                     type: string
                   player2:
+                    type: string
+                  move1:
+                    type: string
+                    format: uint64
+                  move2:
+                    type: string
+                    format: uint64
+                  playerToMove:
+                    type: string
+                    format: uint64
+                  winner:
                     type: string
         default:
           description: An unexpected error response.
@@ -30243,11 +30265,24 @@ definitions:
         type: string
       player2:
         type: string
+      move1:
+        type: string
+        format: uint64
+      move2:
+        type: string
+        format: uint64
+      playerToMove:
+        type: string
+        format: uint64
+      winner:
+        type: string
   alice.checkers.biggernum.MsgCreateGameResponse:
     type: object
     properties:
       gameId:
         type: string
+  alice.checkers.biggernum.MsgPlayMoveResponse:
+    type: object
   alice.checkers.biggernum.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -30264,6 +30299,17 @@ definitions:
             player1:
               type: string
             player2:
+              type: string
+            move1:
+              type: string
+              format: uint64
+            move2:
+              type: string
+              format: uint64
+            playerToMove:
+              type: string
+              format: uint64
+            winner:
               type: string
       pagination:
         type: object
@@ -30301,6 +30347,17 @@ definitions:
           player1:
             type: string
           player2:
+            type: string
+          move1:
+            type: string
+            format: uint64
+          move2:
+            type: string
+            format: uint64
+          playerToMove:
+            type: string
+            format: uint64
+          winner:
             type: string
   alice.checkers.biggernum.QueryGetSystemInfoResponse:
     type: object
