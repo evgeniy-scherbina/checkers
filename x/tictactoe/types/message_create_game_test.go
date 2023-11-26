@@ -1,6 +1,7 @@
 package types
 
 import (
+	"github.com/alice/checkers/x/tictactoe/testutil"
 	"testing"
 
 	"github.com/alice/checkers/testutil/sample"
@@ -18,12 +19,16 @@ func TestMsgCreateGame_ValidateBasic(t *testing.T) {
 			name: "invalid address",
 			msg: MsgCreateGame{
 				Creator: "invalid_address",
+				XPlayer: testutil.Alice,
+				OPlayer: testutil.Bob,
 			},
 			err: sdkerrors.ErrInvalidAddress,
 		}, {
 			name: "valid address",
 			msg: MsgCreateGame{
 				Creator: sample.AccAddress(),
+				XPlayer: testutil.Alice,
+				OPlayer: testutil.Bob,
 			},
 		},
 	}
