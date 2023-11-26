@@ -1,0 +1,10 @@
+syntax = "proto3";
+package alice.checkers.biggernum;
+
+option go_package = "github.com/alice/checkers/x/biggernum/types";
+
+message Games {
+  string index = 1; 
+  
+}
+

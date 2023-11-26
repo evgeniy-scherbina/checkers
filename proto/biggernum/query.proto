@@ -1,0 +1,69 @@
+syntax = "proto3";
+package alice.checkers.biggernum;
+
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "biggernum/params.proto";
+import "biggernum/system_info.proto";
+import "biggernum/games.proto";
+// this line is used by starport scaffolding # 1
+
+option go_package = "github.com/alice/checkers/x/biggernum/types";
+
+// Query defines the gRPC querier service.
+service Query {
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/alice/checkers/biggernum/params";
+  }
+  // Queries a SystemInfo by index.
+	rpc SystemInfo(QueryGetSystemInfoRequest) returns (QueryGetSystemInfoResponse) {
+		option (google.api.http).get = "/alice/checkers/biggernum/system_info";
+	}
+// Queries a Games by index.
+	rpc Games(QueryGetGamesRequest) returns (QueryGetGamesResponse) {
+		option (google.api.http).get = "/alice/checkers/biggernum/games/{index}";
+	}
+
+	// Queries a list of Games items.
+	rpc GamesAll(QueryAllGamesRequest) returns (QueryAllGamesResponse) {
+		option (google.api.http).get = "/alice/checkers/biggernum/games";
+	}
+
+// this line is used by starport scaffolding # 2
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+  // params holds all the parameters of this module.
+  Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetSystemInfoRequest {}
+
+message QueryGetSystemInfoResponse {
+	SystemInfo SystemInfo = 1 [(gogoproto.nullable) = false];
+}
+message QueryGetGamesRequest {
+	  string index = 1;
+
+}
+
+message QueryGetGamesResponse {
+	Games games = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllGamesRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllGamesResponse {
+	repeated Games games = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
+// this line is used by starport scaffolding # 3

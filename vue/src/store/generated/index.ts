@@ -1,5 +1,6 @@
 // THIS FILE IS GENERATED AUTOMATICALLY. DO NOT MODIFY.
 
+import AliceCheckersAliceCheckersBiggernum from './alice/checkers/alice.checkers.biggernum'
 import AliceCheckersAliceCheckersCheckers from './alice/checkers/alice.checkers.checkers'
 import AliceCheckersAliceCheckersTictactoe from './alice/checkers/alice.checkers.tictactoe'
 import CosmosCosmosSdkCosmosAuthV1Beta1 from './cosmos/cosmos-sdk/cosmos.auth.v1beta1'
@@ -25,6 +26,7 @@ import CosmosIbcGoIbcCorePortV1 from './cosmos/ibc-go/ibc.core.port.v1'
 
 
 export default { 
+  AliceCheckersAliceCheckersBiggernum: load(AliceCheckersAliceCheckersBiggernum, 'alice.checkers.biggernum'),
   AliceCheckersAliceCheckersCheckers: load(AliceCheckersAliceCheckersCheckers, 'alice.checkers.checkers'),
   AliceCheckersAliceCheckersTictactoe: load(AliceCheckersAliceCheckersTictactoe, 'alice.checkers.tictactoe'),
   CosmosCosmosSdkCosmosAuthV1Beta1: load(CosmosCosmosSdkCosmosAuthV1Beta1, 'cosmos.auth.v1beta1'),
