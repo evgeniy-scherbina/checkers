@@ -25,7 +25,7 @@ func GetStoredGame1() *types.StoredGame {
 	return &types.StoredGame{
 		Index:    "1",
 		Board:    string(serializedBoard),
-		NextTurn: string(g.NextTurn()),
+		NextTurn: string(g.NextTurn),
 		XPlayer:  alice,
 		OPlayer:  bob,
 	}

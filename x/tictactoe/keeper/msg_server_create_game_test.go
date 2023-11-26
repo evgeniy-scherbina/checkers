@@ -3,6 +3,7 @@ package keeper_test
 import (
 	"context"
 	"github.com/alice/checkers/x/tictactoe"
+	"github.com/alice/checkers/x/tictactoe/rules"
 	"testing"
 
 	sdk "github.com/cosmos/cosmos-sdk/types"
@@ -46,9 +47,12 @@ func TestCreate1GameHasSaved(t *testing.T) {
 	}, systemInfo)
 	game1, found1 := keeper.GetStoredGame(sdk.UnwrapSDKContext(context), "1")
 	require.True(t, found1)
+
+	board := rules.NewGame().MustSerialize()
+
 	require.EqualValues(t, types.StoredGame{
 		Index:    "1",
-		Board:    "{}",
+		Board:    string(board),
 		NextTurn: "X",
 		XPlayer:  bob,
 		OPlayer:  carol,

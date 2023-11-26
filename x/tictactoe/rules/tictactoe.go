@@ -11,8 +11,8 @@ const (
 )
 
 type Game struct {
-	board    [][]byte
-	nextTurn byte
+	Board    [][]byte `json:"board"`
+	NextTurn byte     `json:"next_turn"`
 }
 
 func NewGame() *Game {
@@ -25,8 +25,8 @@ func NewGame() *Game {
 	}
 
 	return &Game{
-		board:    board,
-		nextTurn: XSymbol,
+		Board:    board,
+		NextTurn: XSymbol,
 	}
 }
 
@@ -52,9 +52,9 @@ func Deserialize(data []byte) (*Game, error) {
 	return &g, nil
 }
 
-func (g *Game) NextTurn() byte {
-	return g.nextTurn
-}
+//func (g *Game) NextTurn() byte {
+//	return g.nextTurn
+//}
 
 func (g *Game) PlayMove(i, j int) {
 	// TODO: implement

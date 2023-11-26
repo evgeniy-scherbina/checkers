@@ -28,7 +28,7 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	storedGame := types.StoredGame{
 		Index:    newIndex,
 		Board:    string(newGame.MustSerialize()),
-		NextTurn: string(newGame.NextTurn()),
+		NextTurn: string(newGame.NextTurn),
 		XPlayer:  msg.XPlayer,
 		OPlayer:  msg.OPlayer,
 	}
