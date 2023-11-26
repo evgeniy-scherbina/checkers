@@ -4,5 +4,5 @@ package alice.checkers.biggernum;
 option go_package = "github.com/alice/checkers/x/biggernum/types";
 
 message SystemInfo {
-  
+  uint64 nextId = 1;
 }

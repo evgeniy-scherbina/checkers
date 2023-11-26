@@ -21,6 +21,10 @@ paths:
                   properties:
                     index:
                       type: string
+                    player1:
+                      type: string
+                    player2:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -140,6 +144,10 @@ paths:
                 properties:
                   index:
                     type: string
+                  player1:
+                    type: string
+                  player2:
+                    type: string
         default:
           description: An unexpected error response.
           schema:
@@ -213,6 +221,10 @@ paths:
             properties:
               SystemInfo:
                 type: object
+                properties:
+                  nextId:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -30227,6 +30239,15 @@ definitions:
     properties:
       index:
         type: string
+      player1:
+        type: string
+      player2:
+        type: string
+  alice.checkers.biggernum.MsgCreateGameResponse:
+    type: object
+    properties:
+      gameId:
+        type: string
   alice.checkers.biggernum.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -30239,6 +30260,10 @@ definitions:
           type: object
           properties:
             index:
+              type: string
+            player1:
+              type: string
+            player2:
               type: string
       pagination:
         type: object
@@ -30273,11 +30298,19 @@ definitions:
         properties:
           index:
             type: string
+          player1:
+            type: string
+          player2:
+            type: string
   alice.checkers.biggernum.QueryGetSystemInfoResponse:
     type: object
     properties:
       SystemInfo:
         type: object
+        properties:
+          nextId:
+            type: string
+            format: uint64
   alice.checkers.biggernum.QueryParamsResponse:
     type: object
     properties:
@@ -30287,6 +30320,10 @@ definitions:
     description: QueryParamsResponse is response type for the Query/Params RPC method.
   alice.checkers.biggernum.SystemInfo:
     type: object
+    properties:
+      nextId:
+        type: string
+        format: uint64
   cosmos.base.query.v1beta1.PageRequest:
     type: object
     properties:

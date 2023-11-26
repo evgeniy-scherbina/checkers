@@ -11,6 +11,12 @@
 
 export interface BiggernumGames {
   index?: string;
+  player1?: string;
+  player2?: string;
+}
+
+export interface BiggernumMsgCreateGameResponse {
+  gameId?: string;
 }
 
 /**
@@ -49,7 +55,10 @@ export interface BiggernumQueryParamsResponse {
   params?: BiggernumParams;
 }
 
-export type BiggernumSystemInfo = object;
+export interface BiggernumSystemInfo {
+  /** @format uint64 */
+  nextId?: string;
+}
 
 export interface ProtobufAny {
   "@type"?: string;

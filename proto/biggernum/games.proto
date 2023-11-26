@@ -4,7 +4,8 @@ package alice.checkers.biggernum;
 option go_package = "github.com/alice/checkers/x/biggernum/types";
 
 message Games {
-  string index = 1; 
-  
+  string index = 1;
+  string player1 = 2;
+  string player2 = 3;
 }
 
