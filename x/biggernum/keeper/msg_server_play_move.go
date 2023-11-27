@@ -35,6 +35,7 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 	// process move
 	if game.PlayerToMove == 1 {
 		game.Move1 = msg.Number
+		game.PlayerToMove++
 	} else if game.PlayerToMove == 2 {
 		game.Move2 = msg.Number
 	}
@@ -50,6 +51,8 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 
 		game.Winner = winner
 	}
+
+	k.SetGames(ctx, game)
 
 	return &types.MsgPlayMoveResponse{}, nil
 }

@@ -23,9 +23,10 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 
 	// store the game
 	k.SetGames(ctx, types.Games{
-		Index:   newIndex,
-		Player1: msg.Player1,
-		Player2: msg.Player2,
+		Index:        newIndex,
+		Player1:      msg.Player1,
+		Player2:      msg.Player2,
+		PlayerToMove: 1,
 	})
 
 	// update index
