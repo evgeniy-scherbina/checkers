@@ -23,7 +23,7 @@ var _ = math.Inf
 const _ = proto.GoGoProtoPackageIsVersion3 // please upgrade the proto package
 
 type SystemInfo struct {
-	NextId string `protobuf:"bytes,1,opt,name=nextId,proto3" json:"nextId,omitempty"`
+	NextId uint64 `protobuf:"varint,1,opt,name=nextId,proto3" json:"nextId,omitempty"`
 }
 
 func (m *SystemInfo) Reset()         { *m = SystemInfo{} }
@@ -59,11 +59,11 @@ func (m *SystemInfo) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_SystemInfo proto.InternalMessageInfo
 
-func (m *SystemInfo) GetNextId() string {
+func (m *SystemInfo) GetNextId() uint64 {
 	if m != nil {
 		return m.NextId
 	}
-	return ""
+	return 0
 }
 
 func init() {
@@ -79,11 +79,11 @@ var fileDescriptor_afeabfd4f6a0180b = []byte{
 	0xcb, 0xd7, 0x2b, 0x28, 0xca, 0x2f, 0xc9, 0x17, 0x92, 0x48, 0xcc, 0xc9, 0x4c, 0x4e, 0xd5, 0x4b,
 	0xce, 0x48, 0x4d, 0xce, 0x4e, 0x2d, 0x2a, 0xd6, 0x83, 0xab, 0x55, 0x52, 0xe1, 0xe2, 0x0a, 0x06,
 	0x2b, 0xf7, 0xcc, 0x4b, 0xcb, 0x17, 0x12, 0xe3, 0x62, 0xcb, 0x4b, 0xad, 0x28, 0xf1, 0x4c, 0x91,
-	0x60, 0x54, 0x60, 0xd4, 0xe0, 0x0c, 0x82, 0xf2, 0x9c, 0x5c, 0x4f, 0x3c, 0x92, 0x63, 0xbc, 0xf0,
+	0x60, 0x54, 0x60, 0xd4, 0x60, 0x09, 0x82, 0xf2, 0x9c, 0x5c, 0x4f, 0x3c, 0x92, 0x63, 0xbc, 0xf0,
 	0x48, 0x8e, 0xf1, 0xc1, 0x23, 0x39, 0xc6, 0x09, 0x8f, 0xe5, 0x18, 0x2e, 0x3c, 0x96, 0x63, 0xb8,
 	0xf1, 0x58, 0x8e, 0x21, 0x4a, 0x3b, 0x3d, 0xb3, 0x24, 0xa3, 0x34, 0x49, 0x2f, 0x39, 0x3f, 0x57,
 	0x1f, 0x6c, 0x89, 0x3e, 0xcc, 0x12, 0xfd, 0x0a, 0x7d, 0x84, 0x93, 0x4a, 0x2a, 0x0b, 0x52, 0x8b,
-	0x93, 0xd8, 0xc0, 0xae, 0x31, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xdc, 0x0f, 0xc5, 0xfc, 0xac,
+	0x93, 0xd8, 0xc0, 0xae, 0x31, 0x06, 0x04, 0x00, 0x00, 0xff, 0xff, 0xeb, 0x2b, 0xdd, 0xfc, 0xac,
 	0x00, 0x00, 0x00,
 }
 
@@ -107,12 +107,10 @@ func (m *SystemInfo) MarshalToSizedBuffer(dAtA []byte) (int, error) {
 	_ = i
 	var l int
 	_ = l
-	if len(m.NextId) > 0 {
-		i -= len(m.NextId)
-		copy(dAtA[i:], m.NextId)
-		i = encodeVarintSystemInfo(dAtA, i, uint64(len(m.NextId)))
+	if m.NextId != 0 {
+		i = encodeVarintSystemInfo(dAtA, i, uint64(m.NextId))
 		i--
-		dAtA[i] = 0xa
+		dAtA[i] = 0x8
 	}
 	return len(dAtA) - i, nil
 }
@@ -134,9 +132,8 @@ func (m *SystemInfo) Size() (n int) {
 	}
 	var l int
 	_ = l
-	l = len(m.NextId)
-	if l > 0 {
-		n += 1 + l + sovSystemInfo(uint64(l))
+	if m.NextId != 0 {
+		n += 1 + sovSystemInfo(uint64(m.NextId))
 	}
 	return n
 }
@@ -177,10 +174,10 @@ func (m *SystemInfo) Unmarshal(dAtA []byte) error {
 		}
 		switch fieldNum {
 		case 1:
-			if wireType != 2 {
+			if wireType != 0 {
 				return fmt.Errorf("proto: wrong wireType = %d for field NextId", wireType)
 			}
-			var stringLen uint64
+			m.NextId = 0
 			for shift := uint(0); ; shift += 7 {
 				if shift >= 64 {
 					return ErrIntOverflowSystemInfo
@@ -190,24 +187,11 @@ func (m *SystemInfo) Unmarshal(dAtA []byte) error {
 				}
 				b := dAtA[iNdEx]
 				iNdEx++
-				stringLen |= uint64(b&0x7F) << shift
+				m.NextId |= uint64(b&0x7F) << shift
 				if b < 0x80 {
 					break
 				}
 			}
-			intStringLen := int(stringLen)
-			if intStringLen < 0 {
-				return ErrInvalidLengthSystemInfo
-			}
-			postIndex := iNdEx + intStringLen
-			if postIndex < 0 {
-				return ErrInvalidLengthSystemInfo
-			}
-			if postIndex > l {
-				return io.ErrUnexpectedEOF
-			}
-			m.NextId = string(dAtA[iNdEx:postIndex])
-			iNdEx = postIndex
 		default:
 			iNdEx = preIndex
 			skippy, err := skipSystemInfo(dAtA[iNdEx:])

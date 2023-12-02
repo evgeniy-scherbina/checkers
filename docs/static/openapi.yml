@@ -778,6 +778,7 @@ paths:
                 properties:
                   nextId:
                     type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -31263,6 +31264,7 @@ definitions:
         properties:
           nextId:
             type: string
+            format: uint64
   alice.checkers.lessernum.QueryParamsResponse:
     type: object
     properties:
@@ -31286,6 +31288,7 @@ definitions:
     properties:
       nextId:
         type: string
+        format: uint64
   alice.checkers.tictactoe.MsgCreateGameResponse:
     type: object
     properties:

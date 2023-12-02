@@ -53,6 +53,7 @@ export interface LessernumStoredGame {
 }
 
 export interface LessernumSystemInfo {
+  /** @format uint64 */
   nextId?: string;
 }
 
