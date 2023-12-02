@@ -31198,6 +31198,8 @@ definitions:
       fifoTailIndex:
         type: string
         description: Will contain the index of the game at the tail.
+  alice.checkers.lessernum.MsgCreateGameResponse:
+    type: object
   alice.checkers.lessernum.Params:
     type: object
     description: Params defines the parameters for the module.
