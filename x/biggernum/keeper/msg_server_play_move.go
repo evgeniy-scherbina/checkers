@@ -28,6 +28,8 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		if msg.Creator != game.Player2 {
 			return nil, fmt.Errorf("not your turn")
 		}
+	} else if game.PlayerToMove == 3 {
+		return nil, fmt.Errorf("game is finished")
 	} else {
 		panic("player to move should be either 1 or 2")
 	}
@@ -38,10 +40,11 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		game.PlayerToMove++
 	} else if game.PlayerToMove == 2 {
 		game.Move2 = msg.Number
+		game.PlayerToMove++
 	}
 
 	// process finished game
-	if game.PlayerToMove == 2 {
+	if game.PlayerToMove == 3 {
 		var winner string
 		if game.Move1 >= game.Move2 {
 			winner = game.Player1
