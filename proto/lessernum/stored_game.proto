@@ -1,0 +1,13 @@
+syntax = "proto3";
+package alice.checkers.lessernum;
+
+option go_package = "github.com/alice/checkers/x/lessernum/types";
+
+message StoredGame {
+  string index = 1; 
+  string gameId = 2; 
+  string player1 = 3; 
+  string player2 = 4; 
+  
+}
+

@@ -3,6 +3,8 @@ package alice.checkers.lessernum;
 
 import "gogoproto/gogo.proto";
 import "lessernum/params.proto";
+import "lessernum/system_info.proto";
+import "lessernum/stored_game.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/alice/checkers/x/lessernum/types";
@@ -10,5 +12,7 @@ option go_package = "github.com/alice/checkers/x/lessernum/types";
 // GenesisState defines the lessernum module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  SystemInfo systemInfo = 2;
+  repeated StoredGame storedGameList = 3 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }

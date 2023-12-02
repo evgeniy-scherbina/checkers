@@ -1,0 +1,9 @@
+syntax = "proto3";
+package alice.checkers.lessernum;
+
+option go_package = "github.com/alice/checkers/x/lessernum/types";
+
+message SystemInfo {
+  string nextId = 1; 
+  
+}
