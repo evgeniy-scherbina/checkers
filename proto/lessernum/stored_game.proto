@@ -8,5 +8,8 @@ message StoredGame {
   string player1 = 2;
   string player2 = 3;
   uint64 playerToMove = 4;
+  uint64 move1 = 5;
+  uint64 move2 = 6;
+  string winner = 7;
 }
 
