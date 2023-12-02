@@ -1,0 +1,14 @@
+syntax = "proto3";
+package alice.checkers.lessernum;
+
+import "gogoproto/gogo.proto";
+import "lessernum/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/alice/checkers/x/lessernum/types";
+
+// GenesisState defines the lessernum module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

@@ -2,6 +2,7 @@
 
 import AliceCheckersAliceCheckersBiggernum from './alice/checkers/alice.checkers.biggernum'
 import AliceCheckersAliceCheckersCheckers from './alice/checkers/alice.checkers.checkers'
+import AliceCheckersAliceCheckersLessernum from './alice/checkers/alice.checkers.lessernum'
 import AliceCheckersAliceCheckersTictactoe from './alice/checkers/alice.checkers.tictactoe'
 import CosmosCosmosSdkCosmosAuthV1Beta1 from './cosmos/cosmos-sdk/cosmos.auth.v1beta1'
 import CosmosCosmosSdkCosmosBankV1Beta1 from './cosmos/cosmos-sdk/cosmos.bank.v1beta1'
@@ -28,6 +29,7 @@ import CosmosIbcGoIbcCorePortV1 from './cosmos/ibc-go/ibc.core.port.v1'
 export default { 
   AliceCheckersAliceCheckersBiggernum: load(AliceCheckersAliceCheckersBiggernum, 'alice.checkers.biggernum'),
   AliceCheckersAliceCheckersCheckers: load(AliceCheckersAliceCheckersCheckers, 'alice.checkers.checkers'),
+  AliceCheckersAliceCheckersLessernum: load(AliceCheckersAliceCheckersLessernum, 'alice.checkers.lessernum'),
   AliceCheckersAliceCheckersTictactoe: load(AliceCheckersAliceCheckersTictactoe, 'alice.checkers.tictactoe'),
   CosmosCosmosSdkCosmosAuthV1Beta1: load(CosmosCosmosSdkCosmosAuthV1Beta1, 'cosmos.auth.v1beta1'),
   CosmosCosmosSdkCosmosBankV1Beta1: load(CosmosCosmosSdkCosmosBankV1Beta1, 'cosmos.bank.v1beta1'),
