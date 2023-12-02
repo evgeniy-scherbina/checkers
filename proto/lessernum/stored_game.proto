@@ -7,6 +7,6 @@ message StoredGame {
   string index = 1; 
   string player1 = 2;
   string player2 = 3;
-  
+  uint64 playerToMove = 4;
 }
 

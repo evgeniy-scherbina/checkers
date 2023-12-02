@@ -607,8 +607,6 @@ paths:
                   properties:
                     index:
                       type: string
-                    gameId:
-                      type: string
                     player1:
                       type: string
                     player2:
@@ -731,8 +729,6 @@ paths:
                 type: object
                 properties:
                   index:
-                    type: string
-                  gameId:
                     type: string
                   player1:
                     type: string
@@ -31200,6 +31196,11 @@ definitions:
         description: Will contain the index of the game at the tail.
   alice.checkers.lessernum.MsgCreateGameResponse:
     type: object
+    properties:
+      gameId:
+        type: string
+  alice.checkers.lessernum.MsgPlayMoveResponse:
+    type: object
   alice.checkers.lessernum.Params:
     type: object
     description: Params defines the parameters for the module.
@@ -31212,8 +31213,6 @@ definitions:
           type: object
           properties:
             index:
-              type: string
-            gameId:
               type: string
             player1:
               type: string
@@ -31252,8 +31251,6 @@ definitions:
         properties:
           index:
             type: string
-          gameId:
-            type: string
           player1:
             type: string
           player2:
@@ -31278,8 +31275,6 @@ definitions:
     type: object
     properties:
       index:
-        type: string
-      gameId:
         type: string
       player1:
         type: string

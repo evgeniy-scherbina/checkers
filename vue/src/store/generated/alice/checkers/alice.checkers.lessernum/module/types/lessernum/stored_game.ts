@@ -5,31 +5,22 @@ export const protobufPackage = "alice.checkers.lessernum";
 
 export interface StoredGame {
   index: string;
-  gameId: string;
   player1: string;
   player2: string;
 }
 
-const baseStoredGame: object = {
-  index: "",
-  gameId: "",
-  player1: "",
-  player2: "",
-};
+const baseStoredGame: object = { index: "", player1: "", player2: "" };
 
 export const StoredGame = {
   encode(message: StoredGame, writer: Writer = Writer.create()): Writer {
     if (message.index !== "") {
       writer.uint32(10).string(message.index);
     }
-    if (message.gameId !== "") {
-      writer.uint32(18).string(message.gameId);
-    }
     if (message.player1 !== "") {
-      writer.uint32(26).string(message.player1);
+      writer.uint32(18).string(message.player1);
     }
     if (message.player2 !== "") {
-      writer.uint32(34).string(message.player2);
+      writer.uint32(26).string(message.player2);
     }
     return writer;
   },
@@ -45,12 +36,9 @@ export const StoredGame = {
           message.index = reader.string();
           break;
         case 2:
-          message.gameId = reader.string();
-          break;
-        case 3:
           message.player1 = reader.string();
           break;
-        case 4:
+        case 3:
           message.player2 = reader.string();
           break;
         default:
@@ -68,11 +56,6 @@ export const StoredGame = {
     } else {
       message.index = "";
     }
-    if (object.gameId !== undefined && object.gameId !== null) {
-      message.gameId = String(object.gameId);
-    } else {
-      message.gameId = "";
-    }
     if (object.player1 !== undefined && object.player1 !== null) {
       message.player1 = String(object.player1);
     } else {
@@ -89,7 +72,6 @@ export const StoredGame = {
   toJSON(message: StoredGame): unknown {
     const obj: any = {};
     message.index !== undefined && (obj.index = message.index);
-    message.gameId !== undefined && (obj.gameId = message.gameId);
     message.player1 !== undefined && (obj.player1 = message.player1);
     message.player2 !== undefined && (obj.player2 = message.player2);
     return obj;
@@ -101,11 +83,6 @@ export const StoredGame = {
       message.index = object.index;
     } else {
       message.index = "";
-    }
-    if (object.gameId !== undefined && object.gameId !== null) {
-      message.gameId = object.gameId;
-    } else {
-      message.gameId = "";
     }
     if (object.player1 !== undefined && object.player1 !== null) {
       message.player1 = object.player1;

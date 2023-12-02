@@ -9,7 +9,11 @@
  * ---------------------------------------------------------------
  */
 
-export type LessernumMsgCreateGameResponse = object;
+export interface LessernumMsgCreateGameResponse {
+  gameId?: string;
+}
+
+export type LessernumMsgPlayMoveResponse = object;
 
 /**
  * Params defines the parameters for the module.
@@ -49,7 +53,6 @@ export interface LessernumQueryParamsResponse {
 
 export interface LessernumStoredGame {
   index?: string;
-  gameId?: string;
   player1?: string;
   player2?: string;
 }
