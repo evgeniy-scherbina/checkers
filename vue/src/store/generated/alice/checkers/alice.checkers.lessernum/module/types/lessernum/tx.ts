@@ -8,6 +8,7 @@ export interface MsgCreateGame {
   creator: string;
   player1: string;
   player2: string;
+  wager: number;
 }
 
 export interface MsgCreateGameResponse {
@@ -22,7 +23,12 @@ export interface MsgPlayMove {
 
 export interface MsgPlayMoveResponse {}
 
-const baseMsgCreateGame: object = { creator: "", player1: "", player2: "" };
+const baseMsgCreateGame: object = {
+  creator: "",
+  player1: "",
+  player2: "",
+  wager: 0,
+};
 
 export const MsgCreateGame = {
   encode(message: MsgCreateGame, writer: Writer = Writer.create()): Writer {
@@ -34,6 +40,9 @@ export const MsgCreateGame = {
     }
     if (message.player2 !== "") {
       writer.uint32(26).string(message.player2);
+    }
+    if (message.wager !== 0) {
+      writer.uint32(32).uint64(message.wager);
     }
     return writer;
   },
@@ -53,6 +62,9 @@ export const MsgCreateGame = {
           break;
         case 3:
           message.player2 = reader.string();
+          break;
+        case 4:
+          message.wager = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -79,6 +91,11 @@ export const MsgCreateGame = {
     } else {
       message.player2 = "";
     }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = Number(object.wager);
+    } else {
+      message.wager = 0;
+    }
     return message;
   },
 
@@ -87,6 +104,7 @@ export const MsgCreateGame = {
     message.creator !== undefined && (obj.creator = message.creator);
     message.player1 !== undefined && (obj.player1 = message.player1);
     message.player2 !== undefined && (obj.player2 = message.player2);
+    message.wager !== undefined && (obj.wager = message.wager);
     return obj;
   },
 
@@ -106,6 +124,11 @@ export const MsgCreateGame = {
       message.player2 = object.player2;
     } else {
       message.player2 = "";
+    }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = object.wager;
+    } else {
+      message.wager = 0;
     }
     return message;
   },

@@ -25,6 +25,7 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 		Player1:      msg.Player1,
 		Player2:      msg.Player2,
 		PlayerToMove: 1,
+		Wager:        msg.Wager,
 	}
 	k.SetStoredGame(ctx, game)
 
@@ -34,4 +35,8 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	return &types.MsgCreateGameResponse{
 		GameId: nextId,
 	}, nil
+}
+
+func GetWagerCoin(storedGame *types.StoredGame) (wager sdk.Coin) {
+	return sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(int64(storedGame.Wager)))
 }

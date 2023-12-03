@@ -65,6 +65,9 @@ export interface LessernumStoredGame {
   /** @format uint64 */
   move2?: string;
   winner?: string;
+
+  /** @format uint64 */
+  wager?: string;
 }
 
 export interface LessernumSystemInfo {

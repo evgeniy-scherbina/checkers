@@ -12,6 +12,7 @@ export interface StoredGame {
   move1: number;
   move2: number;
   winner: string;
+  wager: number;
 }
 
 const baseStoredGame: object = {
@@ -22,6 +23,7 @@ const baseStoredGame: object = {
   move1: 0,
   move2: 0,
   winner: "",
+  wager: 0,
 };
 
 export const StoredGame = {
@@ -46,6 +48,9 @@ export const StoredGame = {
     }
     if (message.winner !== "") {
       writer.uint32(58).string(message.winner);
+    }
+    if (message.wager !== 0) {
+      writer.uint32(64).uint64(message.wager);
     }
     return writer;
   },
@@ -77,6 +82,9 @@ export const StoredGame = {
           break;
         case 7:
           message.winner = reader.string();
+          break;
+        case 8:
+          message.wager = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -123,6 +131,11 @@ export const StoredGame = {
     } else {
       message.winner = "";
     }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = Number(object.wager);
+    } else {
+      message.wager = 0;
+    }
     return message;
   },
 
@@ -136,6 +149,7 @@ export const StoredGame = {
     message.move1 !== undefined && (obj.move1 = message.move1);
     message.move2 !== undefined && (obj.move2 = message.move2);
     message.winner !== undefined && (obj.winner = message.winner);
+    message.wager !== undefined && (obj.wager = message.wager);
     return obj;
   },
 
@@ -175,6 +189,11 @@ export const StoredGame = {
       message.winner = object.winner;
     } else {
       message.winner = "";
+    }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = object.wager;
+    } else {
+      message.wager = 0;
     }
     return message;
   },

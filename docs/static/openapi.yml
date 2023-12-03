@@ -622,6 +622,9 @@ paths:
                       format: uint64
                     winner:
                       type: string
+                    wager:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -756,6 +759,9 @@ paths:
                     format: uint64
                   winner:
                     type: string
+                  wager:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -31251,6 +31257,9 @@ definitions:
               format: uint64
             winner:
               type: string
+            wager:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -31299,6 +31308,9 @@ definitions:
             format: uint64
           winner:
             type: string
+          wager:
+            type: string
+            format: uint64
   alice.checkers.lessernum.QueryGetSystemInfoResponse:
     type: object
     properties:
@@ -31335,6 +31347,9 @@ definitions:
         format: uint64
       winner:
         type: string
+      wager:
+        type: string
+        format: uint64
   alice.checkers.lessernum.SystemInfo:
     type: object
     properties:
