@@ -36,7 +36,3 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 		GameId: nextId,
 	}, nil
 }
-
-func GetWagerCoin(storedGame *types.StoredGame) (wager sdk.Coin) {
-	return sdk.NewCoin(sdk.DefaultBondDenom, sdk.NewInt(int64(storedGame.Wager)))
-}

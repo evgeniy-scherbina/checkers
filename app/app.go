@@ -175,14 +175,15 @@ var (
 
 	// module account permissions
 	maccPerms = map[string][]string{
-		authtypes.FeeCollectorName:     nil,
-		distrtypes.ModuleName:          nil,
-		minttypes.ModuleName:           {authtypes.Minter},
-		stakingtypes.BondedPoolName:    {authtypes.Burner, authtypes.Staking},
-		stakingtypes.NotBondedPoolName: {authtypes.Burner, authtypes.Staking},
-		govtypes.ModuleName:            {authtypes.Burner},
-		ibctransfertypes.ModuleName:    {authtypes.Minter, authtypes.Burner},
-		checkersmoduletypes.ModuleName: nil,
+		authtypes.FeeCollectorName:      nil,
+		distrtypes.ModuleName:           nil,
+		minttypes.ModuleName:            {authtypes.Minter},
+		stakingtypes.BondedPoolName:     {authtypes.Burner, authtypes.Staking},
+		stakingtypes.NotBondedPoolName:  {authtypes.Burner, authtypes.Staking},
+		govtypes.ModuleName:             {authtypes.Burner},
+		ibctransfertypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
+		checkersmoduletypes.ModuleName:  nil,
+		lessernummoduletypes.ModuleName: nil,
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -437,6 +438,7 @@ func New(
 	biggernumModule := biggernummodule.NewAppModule(appCodec, app.BiggernumKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.LessernumKeeper = *lessernummodulekeeper.NewKeeper(
+		app.BankKeeper,
 		appCodec,
 		keys[lessernummoduletypes.StoreKey],
 		keys[lessernummoduletypes.MemStoreKey],
