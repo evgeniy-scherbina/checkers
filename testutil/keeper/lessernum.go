@@ -1,6 +1,7 @@
 package keeper
 
 import (
+	"github.com/alice/checkers/x/checkers/testutil"
 	"testing"
 
 	"github.com/alice/checkers/x/lessernum/keeper"
@@ -18,6 +19,10 @@ import (
 )
 
 func LessernumKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+	return LessernumKeeperWithMocks(t, nil)
+}
+
+func LessernumKeeperWithMocks(t testing.TB, bank *testutil.MockBankEscrowKeeper) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -37,6 +42,7 @@ func LessernumKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		"LessernumParams",
 	)
 	k := keeper.NewKeeper(
+		bank,
 		cdc,
 		storeKey,
 		memStoreKey,
