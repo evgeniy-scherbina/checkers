@@ -15,11 +15,12 @@ var _ = strconv.Itoa(0)
 
 func CmdPlayMove() *cobra.Command {
 	cmd := &cobra.Command{
-		Use:   "play-move [number]",
+		Use:   "play-move [gameId] [number]",
 		Short: "Broadcast message playMove",
-		Args:  cobra.ExactArgs(1),
+		Args:  cobra.ExactArgs(2),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argNumber, err := cast.ToUint64E(args[0])
+			argGameId := args[0]
+			argNumber, err := cast.ToUint64E(args[1])
 			if err != nil {
 				return err
 			}
@@ -31,6 +32,7 @@ func CmdPlayMove() *cobra.Command {
 
 			msg := types.NewMsgPlayMove(
 				clientCtx.GetFromAddress().String(),
+				argGameId,
 				argNumber,
 			)
 			if err := msg.ValidateBasic(); err != nil {

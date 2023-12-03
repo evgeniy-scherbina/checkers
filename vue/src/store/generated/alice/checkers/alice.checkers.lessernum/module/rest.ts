@@ -55,6 +55,16 @@ export interface LessernumStoredGame {
   index?: string;
   player1?: string;
   player2?: string;
+
+  /** @format uint64 */
+  playerToMove?: string;
+
+  /** @format uint64 */
+  move1?: string;
+
+  /** @format uint64 */
+  move2?: string;
+  winner?: string;
 }
 
 export interface LessernumSystemInfo {

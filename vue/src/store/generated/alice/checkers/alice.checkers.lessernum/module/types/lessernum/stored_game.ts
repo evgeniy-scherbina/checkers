@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Writer, Reader } from "protobufjs/minimal";
+import * as Long from "long";
+import { util, configure, Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "alice.checkers.lessernum";
 
@@ -7,9 +8,21 @@ export interface StoredGame {
   index: string;
   player1: string;
   player2: string;
+  playerToMove: number;
+  move1: number;
+  move2: number;
+  winner: string;
 }
 
-const baseStoredGame: object = { index: "", player1: "", player2: "" };
+const baseStoredGame: object = {
+  index: "",
+  player1: "",
+  player2: "",
+  playerToMove: 0,
+  move1: 0,
+  move2: 0,
+  winner: "",
+};
 
 export const StoredGame = {
   encode(message: StoredGame, writer: Writer = Writer.create()): Writer {
@@ -21,6 +34,18 @@ export const StoredGame = {
     }
     if (message.player2 !== "") {
       writer.uint32(26).string(message.player2);
+    }
+    if (message.playerToMove !== 0) {
+      writer.uint32(32).uint64(message.playerToMove);
+    }
+    if (message.move1 !== 0) {
+      writer.uint32(40).uint64(message.move1);
+    }
+    if (message.move2 !== 0) {
+      writer.uint32(48).uint64(message.move2);
+    }
+    if (message.winner !== "") {
+      writer.uint32(58).string(message.winner);
     }
     return writer;
   },
@@ -40,6 +65,18 @@ export const StoredGame = {
           break;
         case 3:
           message.player2 = reader.string();
+          break;
+        case 4:
+          message.playerToMove = longToNumber(reader.uint64() as Long);
+          break;
+        case 5:
+          message.move1 = longToNumber(reader.uint64() as Long);
+          break;
+        case 6:
+          message.move2 = longToNumber(reader.uint64() as Long);
+          break;
+        case 7:
+          message.winner = reader.string();
           break;
         default:
           reader.skipType(tag & 7);
@@ -66,6 +103,26 @@ export const StoredGame = {
     } else {
       message.player2 = "";
     }
+    if (object.playerToMove !== undefined && object.playerToMove !== null) {
+      message.playerToMove = Number(object.playerToMove);
+    } else {
+      message.playerToMove = 0;
+    }
+    if (object.move1 !== undefined && object.move1 !== null) {
+      message.move1 = Number(object.move1);
+    } else {
+      message.move1 = 0;
+    }
+    if (object.move2 !== undefined && object.move2 !== null) {
+      message.move2 = Number(object.move2);
+    } else {
+      message.move2 = 0;
+    }
+    if (object.winner !== undefined && object.winner !== null) {
+      message.winner = String(object.winner);
+    } else {
+      message.winner = "";
+    }
     return message;
   },
 
@@ -74,6 +131,11 @@ export const StoredGame = {
     message.index !== undefined && (obj.index = message.index);
     message.player1 !== undefined && (obj.player1 = message.player1);
     message.player2 !== undefined && (obj.player2 = message.player2);
+    message.playerToMove !== undefined &&
+      (obj.playerToMove = message.playerToMove);
+    message.move1 !== undefined && (obj.move1 = message.move1);
+    message.move2 !== undefined && (obj.move2 = message.move2);
+    message.winner !== undefined && (obj.winner = message.winner);
     return obj;
   },
 
@@ -94,9 +156,39 @@ export const StoredGame = {
     } else {
       message.player2 = "";
     }
+    if (object.playerToMove !== undefined && object.playerToMove !== null) {
+      message.playerToMove = object.playerToMove;
+    } else {
+      message.playerToMove = 0;
+    }
+    if (object.move1 !== undefined && object.move1 !== null) {
+      message.move1 = object.move1;
+    } else {
+      message.move1 = 0;
+    }
+    if (object.move2 !== undefined && object.move2 !== null) {
+      message.move2 = object.move2;
+    } else {
+      message.move2 = 0;
+    }
+    if (object.winner !== undefined && object.winner !== null) {
+      message.winner = object.winner;
+    } else {
+      message.winner = "";
+    }
     return message;
   },
 };
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== "undefined") return globalThis;
+  if (typeof self !== "undefined") return self;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  throw "Unable to locate global object";
+})();
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
@@ -108,3 +200,15 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (util.Long !== Long) {
+  util.Long = Long as any;
+  configure();
+}

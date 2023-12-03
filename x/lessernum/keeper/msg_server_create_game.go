@@ -21,9 +21,10 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 	nextId := strconv.FormatUint(systemInfo.NextId, 10)
 
 	game := types.StoredGame{
-		Index:   nextId,
-		Player1: msg.Player1,
-		Player2: msg.Player2,
+		Index:        nextId,
+		Player1:      msg.Player1,
+		Player2:      msg.Player2,
+		PlayerToMove: 1,
 	}
 	k.SetStoredGame(ctx, game)
 

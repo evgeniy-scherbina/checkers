@@ -611,6 +611,17 @@ paths:
                       type: string
                     player2:
                       type: string
+                    playerToMove:
+                      type: string
+                      format: uint64
+                    move1:
+                      type: string
+                      format: uint64
+                    move2:
+                      type: string
+                      format: uint64
+                    winner:
+                      type: string
               pagination:
                 type: object
                 properties:
@@ -733,6 +744,17 @@ paths:
                   player1:
                     type: string
                   player2:
+                    type: string
+                  playerToMove:
+                    type: string
+                    format: uint64
+                  move1:
+                    type: string
+                    format: uint64
+                  move2:
+                    type: string
+                    format: uint64
+                  winner:
                     type: string
         default:
           description: An unexpected error response.
@@ -31218,6 +31240,17 @@ definitions:
               type: string
             player2:
               type: string
+            playerToMove:
+              type: string
+              format: uint64
+            move1:
+              type: string
+              format: uint64
+            move2:
+              type: string
+              format: uint64
+            winner:
+              type: string
       pagination:
         type: object
         properties:
@@ -31255,6 +31288,17 @@ definitions:
             type: string
           player2:
             type: string
+          playerToMove:
+            type: string
+            format: uint64
+          move1:
+            type: string
+            format: uint64
+          move2:
+            type: string
+            format: uint64
+          winner:
+            type: string
   alice.checkers.lessernum.QueryGetSystemInfoResponse:
     type: object
     properties:
@@ -31279,6 +31323,17 @@ definitions:
       player1:
         type: string
       player2:
+        type: string
+      playerToMove:
+        type: string
+        format: uint64
+      move1:
+        type: string
+        format: uint64
+      move2:
+        type: string
+        format: uint64
+      winner:
         type: string
   alice.checkers.lessernum.SystemInfo:
     type: object

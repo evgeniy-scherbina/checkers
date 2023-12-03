@@ -16,6 +16,7 @@ export interface MsgCreateGameResponse {
 
 export interface MsgPlayMove {
   creator: string;
+  gameId: string;
   number: number;
 }
 
@@ -170,15 +171,18 @@ export const MsgCreateGameResponse = {
   },
 };
 
-const baseMsgPlayMove: object = { creator: "", number: 0 };
+const baseMsgPlayMove: object = { creator: "", gameId: "", number: 0 };
 
 export const MsgPlayMove = {
   encode(message: MsgPlayMove, writer: Writer = Writer.create()): Writer {
     if (message.creator !== "") {
       writer.uint32(10).string(message.creator);
     }
+    if (message.gameId !== "") {
+      writer.uint32(18).string(message.gameId);
+    }
     if (message.number !== 0) {
-      writer.uint32(16).uint64(message.number);
+      writer.uint32(24).uint64(message.number);
     }
     return writer;
   },
@@ -194,6 +198,9 @@ export const MsgPlayMove = {
           message.creator = reader.string();
           break;
         case 2:
+          message.gameId = reader.string();
+          break;
+        case 3:
           message.number = longToNumber(reader.uint64() as Long);
           break;
         default:
@@ -211,6 +218,11 @@ export const MsgPlayMove = {
     } else {
       message.creator = "";
     }
+    if (object.gameId !== undefined && object.gameId !== null) {
+      message.gameId = String(object.gameId);
+    } else {
+      message.gameId = "";
+    }
     if (object.number !== undefined && object.number !== null) {
       message.number = Number(object.number);
     } else {
@@ -222,6 +234,7 @@ export const MsgPlayMove = {
   toJSON(message: MsgPlayMove): unknown {
     const obj: any = {};
     message.creator !== undefined && (obj.creator = message.creator);
+    message.gameId !== undefined && (obj.gameId = message.gameId);
     message.number !== undefined && (obj.number = message.number);
     return obj;
   },
@@ -232,6 +245,11 @@ export const MsgPlayMove = {
       message.creator = object.creator;
     } else {
       message.creator = "";
+    }
+    if (object.gameId !== undefined && object.gameId !== null) {
+      message.gameId = object.gameId;
+    } else {
+      message.gameId = "";
     }
     if (object.number !== undefined && object.number !== null) {
       message.number = object.number;

@@ -53,6 +53,7 @@ func makeMove(storedGame *types.StoredGame, number uint64) {
 	switch storedGame.PlayerToMove {
 	case 1:
 		storedGame.Move1 = number
+		storedGame.PlayerToMove++
 	case 2:
 		storedGame.Move2 = number
 
@@ -61,5 +62,7 @@ func makeMove(storedGame *types.StoredGame, number uint64) {
 		} else {
 			storedGame.Winner = storedGame.Player2
 		}
+
+		storedGame.PlayerToMove++
 	}
 }
