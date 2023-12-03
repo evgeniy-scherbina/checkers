@@ -4,6 +4,7 @@ import (
 	"context"
 	"github.com/alice/checkers/x/lessernum"
 	"github.com/alice/checkers/x/lessernum/testutil"
+	"github.com/golang/mock/gomock"
 	"github.com/stretchr/testify/require"
 	"testing"
 
@@ -24,10 +25,27 @@ func setupMsgServerWithInitGenesis(t testing.TB) (types.MsgServer, keeper.Keeper
 	return keeper.NewMsgServerImpl(*k), *k, sdk.WrapSDKContext(ctx)
 }
 
+func setupMsgServerWithInitGenesisWithMock(t testing.TB) (
+	types.MsgServer,
+	keeper.Keeper,
+	context.Context,
+	*gomock.Controller,
+	*testutil.MockBankEscrowKeeper,
+) {
+	ctrl := gomock.NewController(t)
+	bankMock := testutil.NewMockBankEscrowKeeper(ctrl)
+
+	k, ctx := keepertest.LessernumKeeperWithMocks(t, bankMock)
+	lessernum.InitGenesis(ctx, *k, *types.DefaultGenesis())
+	return keeper.NewMsgServerImpl(*k), *k, sdk.WrapSDKContext(ctx), ctrl, bankMock
+}
+
 func TestGame(t *testing.T) {
-	msgServer, keeper, ctx := setupMsgServerWithInitGenesis(t)
+	msgServer, keeper, ctx, ctrl, bankMock := setupMsgServerWithInitGenesisWithMock(t)
 	sdkCtx := sdk.UnwrapSDKContext(ctx)
-	_, _ = keeper, sdkCtx
+
+	defer ctrl.Finish()
+	bankMock.ExpectAny(ctx)
 
 	createGameResp, err := msgServer.CreateGame(ctx, &types.MsgCreateGame{
 		Creator: testutil.Alice,

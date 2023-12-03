@@ -1,7 +1,7 @@
 package keeper
 
 import (
-	"github.com/alice/checkers/x/checkers/testutil"
+	"github.com/alice/checkers/x/lessernum/testutil"
 	"testing"
 
 	"github.com/alice/checkers/x/lessernum/keeper"

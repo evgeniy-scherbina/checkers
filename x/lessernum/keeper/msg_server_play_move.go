@@ -28,6 +28,10 @@ func (k msgServer) PlayMove(goCtx context.Context, msg *types.MsgPlayMove) (*typ
 		return nil, fmt.Errorf("not your turn")
 	}
 
+	err := CollectWager(ctx, &k.Keeper, &storedGame)
+	if err != nil {
+		return nil, err
+	}
 	makeMove(&storedGame, msg.Number)
 	k.SetStoredGame(ctx, storedGame)
 
