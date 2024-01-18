@@ -14,6 +14,11 @@
  */
 export type CheckerssumParams = object;
 
+export interface CheckerssumSystemInfo {
+  /** @format uint64 */
+  nextId?: string;
+}
+
 export interface ProtobufAny {
   "@type"?: string;
 }
@@ -23,6 +28,10 @@ export interface RpcStatus {
   code?: number;
   message?: string;
   details?: ProtobufAny[];
+}
+
+export interface SumQueryGetSystemInfoResponse {
+  SystemInfo?: CheckerssumSystemInfo;
 }
 
 /**
@@ -240,6 +249,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<SumQueryParamsResponse, RpcStatus>({
       path: `/alice/checkers/sum/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QuerySystemInfo
+   * @summary Queries a SystemInfo by index.
+   * @request GET:/alice/checkers/sum/system_info
+   */
+  querySystemInfo = (params: RequestParams = {}) =>
+    this.request<SumQueryGetSystemInfoResponse, RpcStatus>({
+      path: `/alice/checkers/sum/system_info`,
       method: "GET",
       format: "json",
       ...params,
