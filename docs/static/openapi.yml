@@ -884,6 +884,9 @@ paths:
                       type: string
                     red:
                       type: string
+                    wager:
+                      type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -1011,6 +1014,9 @@ paths:
                     type: string
                   red:
                     type: string
+                  wager:
+                    type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -31705,6 +31711,9 @@ definitions:
               type: string
             red:
               type: string
+            wager:
+              type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -31746,6 +31755,9 @@ definitions:
             type: string
           red:
             type: string
+          wager:
+            type: string
+            format: uint64
   alice.checkers.oddnum.QueryGetSystemInfoResponse:
     type: object
     properties:
@@ -31775,6 +31787,9 @@ definitions:
         type: string
       red:
         type: string
+      wager:
+        type: string
+        format: uint64
   alice.checkers.oddnum.SystemInfo:
     type: object
     properties:

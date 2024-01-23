@@ -8,6 +8,7 @@ export interface MsgCreateGame {
   creator: string;
   black: string;
   red: string;
+  wager: number;
 }
 
 export interface MsgCreateGameResponse {
@@ -22,7 +23,7 @@ export interface MsgPlayMove {
 
 export interface MsgPlayMoveResponse {}
 
-const baseMsgCreateGame: object = { creator: "", black: "", red: "" };
+const baseMsgCreateGame: object = { creator: "", black: "", red: "", wager: 0 };
 
 export const MsgCreateGame = {
   encode(message: MsgCreateGame, writer: Writer = Writer.create()): Writer {
@@ -34,6 +35,9 @@ export const MsgCreateGame = {
     }
     if (message.red !== "") {
       writer.uint32(26).string(message.red);
+    }
+    if (message.wager !== 0) {
+      writer.uint32(32).uint64(message.wager);
     }
     return writer;
   },
@@ -53,6 +57,9 @@ export const MsgCreateGame = {
           break;
         case 3:
           message.red = reader.string();
+          break;
+        case 4:
+          message.wager = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -79,6 +86,11 @@ export const MsgCreateGame = {
     } else {
       message.red = "";
     }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = Number(object.wager);
+    } else {
+      message.wager = 0;
+    }
     return message;
   },
 
@@ -87,6 +99,7 @@ export const MsgCreateGame = {
     message.creator !== undefined && (obj.creator = message.creator);
     message.black !== undefined && (obj.black = message.black);
     message.red !== undefined && (obj.red = message.red);
+    message.wager !== undefined && (obj.wager = message.wager);
     return obj;
   },
 
@@ -106,6 +119,11 @@ export const MsgCreateGame = {
       message.red = object.red;
     } else {
       message.red = "";
+    }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = object.wager;
+    } else {
+      message.wager = 0;
     }
     return message;
   },

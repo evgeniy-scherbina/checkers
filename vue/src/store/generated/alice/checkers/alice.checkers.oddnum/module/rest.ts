@@ -20,6 +20,9 @@ export interface CheckersoddnumStoredGame {
   turn?: string;
   black?: string;
   red?: string;
+
+  /** @format uint64 */
+  wager?: string;
 }
 
 export interface CheckersoddnumSystemInfo {

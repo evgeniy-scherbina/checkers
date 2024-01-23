@@ -192,6 +192,7 @@ var (
 		ibctransfertypes.ModuleName:     {authtypes.Minter, authtypes.Burner},
 		checkersmoduletypes.ModuleName:  nil,
 		lessernummoduletypes.ModuleName: nil,
+		oddnummoduletypes.ModuleName:    nil,
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -469,6 +470,7 @@ func New(
 	sumModule := summodule.NewAppModule(appCodec, app.SumKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.OddnumKeeper = *oddnummodulekeeper.NewKeeper(
+		app.BankKeeper,
 		appCodec,
 		keys[oddnummoduletypes.StoreKey],
 		keys[oddnummoduletypes.MemStoreKey],

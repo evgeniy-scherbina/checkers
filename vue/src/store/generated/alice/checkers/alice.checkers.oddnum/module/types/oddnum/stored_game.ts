@@ -1,5 +1,6 @@
 /* eslint-disable */
-import { Writer, Reader } from "protobufjs/minimal";
+import * as Long from "long";
+import { util, configure, Writer, Reader } from "protobufjs/minimal";
 
 export const protobufPackage = "alice.checkers.oddnum";
 
@@ -9,6 +10,7 @@ export interface StoredGame {
   turn: string;
   black: string;
   red: string;
+  wager: number;
 }
 
 const baseStoredGame: object = {
@@ -17,6 +19,7 @@ const baseStoredGame: object = {
   turn: "",
   black: "",
   red: "",
+  wager: 0,
 };
 
 export const StoredGame = {
@@ -35,6 +38,9 @@ export const StoredGame = {
     }
     if (message.red !== "") {
       writer.uint32(42).string(message.red);
+    }
+    if (message.wager !== 0) {
+      writer.uint32(48).uint64(message.wager);
     }
     return writer;
   },
@@ -60,6 +66,9 @@ export const StoredGame = {
           break;
         case 5:
           message.red = reader.string();
+          break;
+        case 6:
+          message.wager = longToNumber(reader.uint64() as Long);
           break;
         default:
           reader.skipType(tag & 7);
@@ -96,6 +105,11 @@ export const StoredGame = {
     } else {
       message.red = "";
     }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = Number(object.wager);
+    } else {
+      message.wager = 0;
+    }
     return message;
   },
 
@@ -106,6 +120,7 @@ export const StoredGame = {
     message.turn !== undefined && (obj.turn = message.turn);
     message.black !== undefined && (obj.black = message.black);
     message.red !== undefined && (obj.red = message.red);
+    message.wager !== undefined && (obj.wager = message.wager);
     return obj;
   },
 
@@ -136,9 +151,24 @@ export const StoredGame = {
     } else {
       message.red = "";
     }
+    if (object.wager !== undefined && object.wager !== null) {
+      message.wager = object.wager;
+    } else {
+      message.wager = 0;
+    }
     return message;
   },
 };
+
+declare var self: any | undefined;
+declare var window: any | undefined;
+var globalThis: any = (() => {
+  if (typeof globalThis !== "undefined") return globalThis;
+  if (typeof self !== "undefined") return self;
+  if (typeof window !== "undefined") return window;
+  if (typeof global !== "undefined") return global;
+  throw "Unable to locate global object";
+})();
 
 type Builtin = Date | Function | Uint8Array | string | number | undefined;
 export type DeepPartial<T> = T extends Builtin
@@ -150,3 +180,15 @@ export type DeepPartial<T> = T extends Builtin
   : T extends {}
   ? { [K in keyof T]?: DeepPartial<T[K]> }
   : Partial<T>;
+
+function longToNumber(long: Long): number {
+  if (long.gt(Number.MAX_SAFE_INTEGER)) {
+    throw new globalThis.Error("Value is larger than Number.MAX_SAFE_INTEGER");
+  }
+  return long.toNumber();
+}
+
+if (util.Long !== Long) {
+  util.Long = Long as any;
+  configure();
+}
