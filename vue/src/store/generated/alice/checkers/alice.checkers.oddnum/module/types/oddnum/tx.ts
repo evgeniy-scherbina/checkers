@@ -23,6 +23,15 @@ export interface MsgPlayMove {
 
 export interface MsgPlayMoveResponse {}
 
+export interface MsgTransfer {
+  creator: string;
+  from: string;
+  to: string;
+  amount: number;
+}
+
+export interface MsgTransferResponse {}
+
 const baseMsgCreateGame: object = { creator: "", black: "", red: "", wager: 0 };
 
 export const MsgCreateGame = {
@@ -316,11 +325,156 @@ export const MsgPlayMoveResponse = {
   },
 };
 
+const baseMsgTransfer: object = { creator: "", from: "", to: "", amount: 0 };
+
+export const MsgTransfer = {
+  encode(message: MsgTransfer, writer: Writer = Writer.create()): Writer {
+    if (message.creator !== "") {
+      writer.uint32(10).string(message.creator);
+    }
+    if (message.from !== "") {
+      writer.uint32(18).string(message.from);
+    }
+    if (message.to !== "") {
+      writer.uint32(26).string(message.to);
+    }
+    if (message.amount !== 0) {
+      writer.uint32(32).uint64(message.amount);
+    }
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTransfer {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTransfer } as MsgTransfer;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        case 1:
+          message.creator = reader.string();
+          break;
+        case 2:
+          message.from = reader.string();
+          break;
+        case 3:
+          message.to = reader.string();
+          break;
+        case 4:
+          message.amount = longToNumber(reader.uint64() as Long);
+          break;
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(object: any): MsgTransfer {
+    const message = { ...baseMsgTransfer } as MsgTransfer;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = String(object.creator);
+    } else {
+      message.creator = "";
+    }
+    if (object.from !== undefined && object.from !== null) {
+      message.from = String(object.from);
+    } else {
+      message.from = "";
+    }
+    if (object.to !== undefined && object.to !== null) {
+      message.to = String(object.to);
+    } else {
+      message.to = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = Number(object.amount);
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+
+  toJSON(message: MsgTransfer): unknown {
+    const obj: any = {};
+    message.creator !== undefined && (obj.creator = message.creator);
+    message.from !== undefined && (obj.from = message.from);
+    message.to !== undefined && (obj.to = message.to);
+    message.amount !== undefined && (obj.amount = message.amount);
+    return obj;
+  },
+
+  fromPartial(object: DeepPartial<MsgTransfer>): MsgTransfer {
+    const message = { ...baseMsgTransfer } as MsgTransfer;
+    if (object.creator !== undefined && object.creator !== null) {
+      message.creator = object.creator;
+    } else {
+      message.creator = "";
+    }
+    if (object.from !== undefined && object.from !== null) {
+      message.from = object.from;
+    } else {
+      message.from = "";
+    }
+    if (object.to !== undefined && object.to !== null) {
+      message.to = object.to;
+    } else {
+      message.to = "";
+    }
+    if (object.amount !== undefined && object.amount !== null) {
+      message.amount = object.amount;
+    } else {
+      message.amount = 0;
+    }
+    return message;
+  },
+};
+
+const baseMsgTransferResponse: object = {};
+
+export const MsgTransferResponse = {
+  encode(_: MsgTransferResponse, writer: Writer = Writer.create()): Writer {
+    return writer;
+  },
+
+  decode(input: Reader | Uint8Array, length?: number): MsgTransferResponse {
+    const reader = input instanceof Uint8Array ? new Reader(input) : input;
+    let end = length === undefined ? reader.len : reader.pos + length;
+    const message = { ...baseMsgTransferResponse } as MsgTransferResponse;
+    while (reader.pos < end) {
+      const tag = reader.uint32();
+      switch (tag >>> 3) {
+        default:
+          reader.skipType(tag & 7);
+          break;
+      }
+    }
+    return message;
+  },
+
+  fromJSON(_: any): MsgTransferResponse {
+    const message = { ...baseMsgTransferResponse } as MsgTransferResponse;
+    return message;
+  },
+
+  toJSON(_: MsgTransferResponse): unknown {
+    const obj: any = {};
+    return obj;
+  },
+
+  fromPartial(_: DeepPartial<MsgTransferResponse>): MsgTransferResponse {
+    const message = { ...baseMsgTransferResponse } as MsgTransferResponse;
+    return message;
+  },
+};
+
 /** Msg defines the Msg service. */
 export interface Msg {
   CreateGame(request: MsgCreateGame): Promise<MsgCreateGameResponse>;
-  /** this line is used by starport scaffolding # proto/tx/rpc */
   PlayMove(request: MsgPlayMove): Promise<MsgPlayMoveResponse>;
+  /** this line is used by starport scaffolding # proto/tx/rpc */
+  Transfer(request: MsgTransfer): Promise<MsgTransferResponse>;
 }
 
 export class MsgClientImpl implements Msg {
@@ -348,6 +502,16 @@ export class MsgClientImpl implements Msg {
       data
     );
     return promise.then((data) => MsgPlayMoveResponse.decode(new Reader(data)));
+  }
+
+  Transfer(request: MsgTransfer): Promise<MsgTransferResponse> {
+    const data = MsgTransfer.encode(request).finish();
+    const promise = this.rpc.request(
+      "alice.checkers.oddnum.Msg",
+      "Transfer",
+      data
+    );
+    return promise.then((data) => MsgTransferResponse.decode(new Reader(data)));
   }
 }
 

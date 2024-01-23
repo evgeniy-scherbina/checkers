@@ -4,13 +4,15 @@ import { StdFee } from "@cosmjs/launchpad";
 import { SigningStargateClient } from "@cosmjs/stargate";
 import { Registry, OfflineSigner, EncodeObject, DirectSecp256k1HdWallet } from "@cosmjs/proto-signing";
 import { Api } from "./rest";
-import { MsgPlayMove } from "./types/oddnum/tx";
 import { MsgCreateGame } from "./types/oddnum/tx";
+import { MsgTransfer } from "./types/oddnum/tx";
+import { MsgPlayMove } from "./types/oddnum/tx";
 
 
 const types = [
-  ["/alice.checkers.oddnum.MsgPlayMove", MsgPlayMove],
   ["/alice.checkers.oddnum.MsgCreateGame", MsgCreateGame],
+  ["/alice.checkers.oddnum.MsgTransfer", MsgTransfer],
+  ["/alice.checkers.oddnum.MsgPlayMove", MsgPlayMove],
   
 ];
 export const MissingWalletError = new Error("wallet is required");
@@ -43,8 +45,9 @@ const txClient = async (wallet: OfflineSigner, { addr: addr }: TxClientOptions =
 
   return {
     signAndBroadcast: (msgs: EncodeObject[], { fee, memo }: SignAndBroadcastOptions = {fee: defaultFee, memo: ""}) => client.signAndBroadcast(address, msgs, fee,memo),
-    msgPlayMove: (data: MsgPlayMove): EncodeObject => ({ typeUrl: "/alice.checkers.oddnum.MsgPlayMove", value: MsgPlayMove.fromPartial( data ) }),
     msgCreateGame: (data: MsgCreateGame): EncodeObject => ({ typeUrl: "/alice.checkers.oddnum.MsgCreateGame", value: MsgCreateGame.fromPartial( data ) }),
+    msgTransfer: (data: MsgTransfer): EncodeObject => ({ typeUrl: "/alice.checkers.oddnum.MsgTransfer", value: MsgTransfer.fromPartial( data ) }),
+    msgPlayMove: (data: MsgPlayMove): EncodeObject => ({ typeUrl: "/alice.checkers.oddnum.MsgPlayMove", value: MsgPlayMove.fromPartial( data ) }),
     
   };
 };
