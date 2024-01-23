@@ -1,0 +1,14 @@
+syntax = "proto3";
+package alice.checkers.oddnum;
+
+import "gogoproto/gogo.proto";
+import "oddnum/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/alice/checkers/x/oddnum/types";
+
+// GenesisState defines the oddnum module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}

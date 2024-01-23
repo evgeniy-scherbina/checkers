@@ -109,6 +109,9 @@ import (
 	lessernummodule "github.com/alice/checkers/x/lessernum"
 	lessernummodulekeeper "github.com/alice/checkers/x/lessernum/keeper"
 	lessernummoduletypes "github.com/alice/checkers/x/lessernum/types"
+	oddnummodule "github.com/alice/checkers/x/oddnum"
+	oddnummodulekeeper "github.com/alice/checkers/x/oddnum/keeper"
+	oddnummoduletypes "github.com/alice/checkers/x/oddnum/types"
 	summodule "github.com/alice/checkers/x/sum"
 	summodulekeeper "github.com/alice/checkers/x/sum/keeper"
 	summoduletypes "github.com/alice/checkers/x/sum/types"
@@ -174,6 +177,7 @@ var (
 		biggernummodule.AppModuleBasic{},
 		lessernummodule.AppModuleBasic{},
 		summodule.AppModuleBasic{},
+		oddnummodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -257,6 +261,8 @@ type App struct {
 	LessernumKeeper lessernummodulekeeper.Keeper
 
 	SumKeeper summodulekeeper.Keeper
+
+	OddnumKeeper oddnummodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -298,6 +304,7 @@ func New(
 		biggernummoduletypes.StoreKey,
 		lessernummoduletypes.StoreKey,
 		summoduletypes.StoreKey,
+		oddnummoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -461,6 +468,14 @@ func New(
 	)
 	sumModule := summodule.NewAppModule(appCodec, app.SumKeeper, app.AccountKeeper, app.BankKeeper)
 
+	app.OddnumKeeper = *oddnummodulekeeper.NewKeeper(
+		appCodec,
+		keys[oddnummoduletypes.StoreKey],
+		keys[oddnummoduletypes.MemStoreKey],
+		app.GetSubspace(oddnummoduletypes.ModuleName),
+	)
+	oddnumModule := oddnummodule.NewAppModule(appCodec, app.OddnumKeeper, app.AccountKeeper, app.BankKeeper)
+
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
 	// Create static IBC router, add transfer route, then set and seal it
@@ -507,6 +522,7 @@ func New(
 		biggernumModule,
 		lessernumModule,
 		sumModule,
+		oddnumModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -539,6 +555,7 @@ func New(
 		biggernummoduletypes.ModuleName,
 		lessernummoduletypes.ModuleName,
 		summoduletypes.ModuleName,
+		oddnummoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -567,6 +584,7 @@ func New(
 		biggernummoduletypes.ModuleName,
 		lessernummoduletypes.ModuleName,
 		summoduletypes.ModuleName,
+		oddnummoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -600,6 +618,7 @@ func New(
 		biggernummoduletypes.ModuleName,
 		lessernummoduletypes.ModuleName,
 		summoduletypes.ModuleName,
+		oddnummoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -629,6 +648,7 @@ func New(
 		biggernumModule,
 		lessernumModule,
 		sumModule,
+		oddnumModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -823,6 +843,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(biggernummoduletypes.ModuleName)
 	paramsKeeper.Subspace(lessernummoduletypes.ModuleName)
 	paramsKeeper.Subspace(summoduletypes.ModuleName)
+	paramsKeeper.Subspace(oddnummoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper

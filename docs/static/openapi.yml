@@ -823,6 +823,42 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /alice/checkers/oddnum/params:
+    get:
+      summary: Parameters queries the parameters of the module.
+      operationId: AliceCheckersOddnumParams
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              params:
+                description: params holds all the parameters of this module.
+                type: object
+            description: >-
+              QueryParamsResponse is response type for the Query/Params RPC
+              method.
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /alice/checkers/sum/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -31428,6 +31464,16 @@ definitions:
       nextId:
         type: string
         format: uint64
+  alice.checkers.oddnum.Params:
+    type: object
+    description: Params defines the parameters for the module.
+  alice.checkers.oddnum.QueryParamsResponse:
+    type: object
+    properties:
+      params:
+        description: params holds all the parameters of this module.
+        type: object
+    description: QueryParamsResponse is response type for the Query/Params RPC method.
   alice.checkers.sum.Params:
     type: object
     description: Params defines the parameters for the module.
