@@ -40,3 +40,12 @@ func TestGenesis(t *testing.T) {
 	require.ElementsMatch(t, genesisState.StoredGameList, got.StoredGameList)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
+
+func TestDefaultGenesisState_ExpectedInitialNextId(t *testing.T) {
+	require.EqualValues(t,
+		&types.GenesisState{
+			StoredGameList: []types.StoredGame{},
+			SystemInfo:     types.SystemInfo{uint64(1)},
+		},
+		types.DefaultGenesis())
+}
