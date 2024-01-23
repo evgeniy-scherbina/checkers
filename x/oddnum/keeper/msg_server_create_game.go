@@ -26,6 +26,7 @@ func (k msgServer) CreateGame(goCtx context.Context, msg *types.MsgCreateGame) (
 		Turn:  "1",
 		Black: msg.Black,
 		Red:   msg.Red,
+		Wager: msg.Wager,
 	}
 	k.Keeper.SetStoredGame(ctx, storedGame)
 
