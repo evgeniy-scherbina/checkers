@@ -1,6 +1,8 @@
 package keeper
 
 import (
+	"github.com/alice/checkers/x/oddnum/testutil"
+	"github.com/golang/mock/gomock"
 	"testing"
 
 	"github.com/alice/checkers/x/oddnum/keeper"
@@ -36,7 +38,12 @@ func OddnumKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		memStoreKey,
 		"OddnumParams",
 	)
+
+	ctrl := gomock.NewController(t)
+	bankMock := testutil.NewMockBankEscrowKeeper(ctrl)
+
 	k := keeper.NewKeeper(
+		bankMock,
 		cdc,
 		storeKey,
 		memStoreKey,
