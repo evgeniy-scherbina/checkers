@@ -22,13 +22,10 @@ export interface CheckersMsgPlayMoveResponse {
   winner?: string;
 }
 
-/**
- * Params defines the parameters for the module.
- */
-export type CheckersParams = object;
+export type CheckersMsgTransferResponse = object;
 
 export interface CheckersQueryAllStoredGameResponse {
-  storedGame?: CheckersStoredGame[];
+  storedGame?: CheckerscheckersStoredGame[];
 
   /**
    * PageResponse is to be embedded in gRPC response messages where the
@@ -43,11 +40,11 @@ export interface CheckersQueryAllStoredGameResponse {
 }
 
 export interface CheckersQueryGetStoredGameResponse {
-  storedGame?: CheckersStoredGame;
+  storedGame?: CheckerscheckersStoredGame;
 }
 
 export interface CheckersQueryGetSystemInfoResponse {
-  SystemInfo?: CheckersSystemInfo;
+  SystemInfo?: CheckerscheckersSystemInfo;
 }
 
 /**
@@ -55,10 +52,15 @@ export interface CheckersQueryGetSystemInfoResponse {
  */
 export interface CheckersQueryParamsResponse {
   /** params holds all the parameters of this module. */
-  params?: CheckersParams;
+  params?: CheckerscheckersParams;
 }
 
-export interface CheckersStoredGame {
+/**
+ * Params defines the parameters for the module.
+ */
+export type CheckerscheckersParams = object;
+
+export interface CheckerscheckersStoredGame {
   index?: string;
   board?: string;
   turn?: string;
@@ -80,7 +82,7 @@ export interface CheckersStoredGame {
   wager?: string;
 }
 
-export interface CheckersSystemInfo {
+export interface CheckerscheckersSystemInfo {
   /** @format uint64 */
   nextId?: string;
 
