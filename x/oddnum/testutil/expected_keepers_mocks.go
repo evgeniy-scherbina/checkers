@@ -109,6 +109,20 @@ func (m *MockBankEscrowKeeper) EXPECT() *MockBankEscrowKeeperMockRecorder {
 	return m.recorder
 }
 
+// SendCoins mocks base method.
+func (m *MockBankEscrowKeeper) SendCoins(ctx types.Context, fromAddr, toAddr types.AccAddress, amt types.Coins) error {
+	m.ctrl.T.Helper()
+	ret := m.ctrl.Call(m, "SendCoins", ctx, fromAddr, toAddr, amt)
+	ret0, _ := ret[0].(error)
+	return ret0
+}
+
+// SendCoins indicates an expected call of SendCoins.
+func (mr *MockBankEscrowKeeperMockRecorder) SendCoins(ctx, fromAddr, toAddr, amt interface{}) *gomock.Call {
+	mr.mock.ctrl.T.Helper()
+	return mr.mock.ctrl.RecordCallWithMethodType(mr.mock, "SendCoins", reflect.TypeOf((*MockBankEscrowKeeper)(nil).SendCoins), ctx, fromAddr, toAddr, amt)
+}
+
 // SendCoinsFromAccountToModule mocks base method.
 func (m *MockBankEscrowKeeper) SendCoinsFromAccountToModule(ctx types.Context, senderAddr types.AccAddress, recipientModule string, amt types.Coins) error {
 	m.ctrl.T.Helper()
