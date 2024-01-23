@@ -31,6 +31,8 @@ export interface OddnumMsgCreateGameResponse {
   gameIndex?: string;
 }
 
+export type OddnumMsgPlayMoveResponse = object;
+
 export interface OddnumQueryAllStoredGameResponse {
   storedGame?: CheckersoddnumStoredGame[];
 

@@ -31682,6 +31682,8 @@ definitions:
     properties:
       gameIndex:
         type: string
+  alice.checkers.oddnum.MsgPlayMoveResponse:
+    type: object
   alice.checkers.oddnum.Params:
     type: object
     description: Params defines the parameters for the module.

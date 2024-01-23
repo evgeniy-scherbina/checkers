@@ -8,6 +8,7 @@ option go_package = "github.com/alice/checkers/x/oddnum/types";
 // Msg defines the Msg service.
 service Msg {
       rpc CreateGame(MsgCreateGame) returns (MsgCreateGameResponse);
+  rpc PlayMove(MsgPlayMove) returns (MsgPlayMoveResponse);
 // this line is used by starport scaffolding # proto/tx/rpc
 }
 
@@ -19,6 +20,15 @@ message MsgCreateGame {
 
 message MsgCreateGameResponse {
   string gameIndex = 1;
+}
+
+message MsgPlayMove {
+  string creator = 1;
+  string gameIndex = 2;
+  uint64 num = 3;
+}
+
+message MsgPlayMoveResponse {
 }
 
 // this line is used by starport scaffolding # proto/tx/message
