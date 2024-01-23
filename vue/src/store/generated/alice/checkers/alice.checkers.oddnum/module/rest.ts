@@ -14,6 +14,15 @@
  */
 export type CheckersoddnumParams = object;
 
+export interface CheckersoddnumSystemInfo {
+  /** @format uint64 */
+  nextId?: string;
+}
+
+export interface OddnumQueryGetSystemInfoResponse {
+  SystemInfo?: CheckersoddnumSystemInfo;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -240,6 +249,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<OddnumQueryParamsResponse, RpcStatus>({
       path: `/alice/checkers/oddnum/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QuerySystemInfo
+   * @summary Queries a SystemInfo by index.
+   * @request GET:/alice/checkers/oddnum/system_info
+   */
+  querySystemInfo = (params: RequestParams = {}) =>
+    this.request<OddnumQueryGetSystemInfoResponse, RpcStatus>({
+      path: `/alice/checkers/oddnum/system_info`,
       method: "GET",
       format: "json",
       ...params,
