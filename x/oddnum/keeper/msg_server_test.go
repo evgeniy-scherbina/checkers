@@ -14,3 +14,8 @@ func setupMsgServer(t testing.TB) (types.MsgServer, context.Context) {
 	k, ctx := keepertest.OddnumKeeper(t)
 	return keeper.NewMsgServerImpl(*k), sdk.WrapSDKContext(ctx)
 }
+
+func setupMsgServerWithBankKeeper(t testing.TB, bank types.BankEscrowKeeper) (types.MsgServer, context.Context) {
+	k, ctx := keepertest.OddnumKeeperWithBankKeeper(t, bank)
+	return keeper.NewMsgServerImpl(*k), sdk.WrapSDKContext(ctx)
+}

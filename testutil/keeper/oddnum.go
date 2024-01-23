@@ -20,6 +20,13 @@ import (
 )
 
 func OddnumKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+	ctrl := gomock.NewController(t)
+	bankMock := testutil.NewMockBankEscrowKeeper(ctrl)
+
+	return OddnumKeeperWithBankKeeper(t, bankMock)
+}
+
+func OddnumKeeperWithBankKeeper(t testing.TB, bank types.BankEscrowKeeper) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -39,11 +46,8 @@ func OddnumKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		"OddnumParams",
 	)
 
-	ctrl := gomock.NewController(t)
-	bankMock := testutil.NewMockBankEscrowKeeper(ctrl)
-
 	k := keeper.NewKeeper(
-		bankMock,
+		bank,
 		cdc,
 		storeKey,
 		memStoreKey,
