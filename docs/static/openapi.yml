@@ -31677,6 +31677,11 @@ definitions:
       nextId:
         type: string
         format: uint64
+  alice.checkers.oddnum.MsgCreateGameResponse:
+    type: object
+    properties:
+      gameIndex:
+        type: string
   alice.checkers.oddnum.Params:
     type: object
     description: Params defines the parameters for the module.

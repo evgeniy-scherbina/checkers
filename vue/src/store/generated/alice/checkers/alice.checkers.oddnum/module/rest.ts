@@ -27,6 +27,10 @@ export interface CheckersoddnumSystemInfo {
   nextId?: string;
 }
 
+export interface OddnumMsgCreateGameResponse {
+  gameIndex?: string;
+}
+
 export interface OddnumQueryAllStoredGameResponse {
   storedGame?: CheckersoddnumStoredGame[];
 
