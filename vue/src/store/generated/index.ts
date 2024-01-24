@@ -4,6 +4,7 @@ import AliceCheckersAliceCheckersBiggernum from './alice/checkers/alice.checkers
 import AliceCheckersAliceCheckersCheckers from './alice/checkers/alice.checkers.checkers'
 import AliceCheckersAliceCheckersLessernum from './alice/checkers/alice.checkers.lessernum'
 import AliceCheckersAliceCheckersOddnum from './alice/checkers/alice.checkers.oddnum'
+import AliceCheckersAliceCheckersPrecompiles from './alice/checkers/alice.checkers.precompiles'
 import AliceCheckersAliceCheckersSum from './alice/checkers/alice.checkers.sum'
 import AliceCheckersAliceCheckersTictactoe from './alice/checkers/alice.checkers.tictactoe'
 import CosmosCosmosSdkCosmosAuthV1Beta1 from './cosmos/cosmos-sdk/cosmos.auth.v1beta1'
@@ -33,6 +34,7 @@ export default {
   AliceCheckersAliceCheckersCheckers: load(AliceCheckersAliceCheckersCheckers, 'alice.checkers.checkers'),
   AliceCheckersAliceCheckersLessernum: load(AliceCheckersAliceCheckersLessernum, 'alice.checkers.lessernum'),
   AliceCheckersAliceCheckersOddnum: load(AliceCheckersAliceCheckersOddnum, 'alice.checkers.oddnum'),
+  AliceCheckersAliceCheckersPrecompiles: load(AliceCheckersAliceCheckersPrecompiles, 'alice.checkers.precompiles'),
   AliceCheckersAliceCheckersSum: load(AliceCheckersAliceCheckersSum, 'alice.checkers.sum'),
   AliceCheckersAliceCheckersTictactoe: load(AliceCheckersAliceCheckersTictactoe, 'alice.checkers.tictactoe'),
   CosmosCosmosSdkCosmosAuthV1Beta1: load(CosmosCosmosSdkCosmosAuthV1Beta1, 'cosmos.auth.v1beta1'),

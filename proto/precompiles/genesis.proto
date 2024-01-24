@@ -1,0 +1,14 @@
+syntax = "proto3";
+package alice.checkers.precompiles;
+
+import "gogoproto/gogo.proto";
+import "precompiles/params.proto";
+// this line is used by starport scaffolding # genesis/proto/import
+
+option go_package = "github.com/alice/checkers/x/precompiles/types";
+
+// GenesisState defines the precompiles module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+  // this line is used by starport scaffolding # genesis/proto/state
+}
