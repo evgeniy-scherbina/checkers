@@ -16,6 +16,8 @@ import (
 	tmproto "github.com/tendermint/tendermint/proto/tendermint/types"
 )
 
+// NEW FEATURE
+
 const (
 	alice = testutil.Alice
 	bob   = testutil.Bob
