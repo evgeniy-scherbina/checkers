@@ -9,7 +9,7 @@ pull_request_rules:
   - name: Backport patches to all release/* branches
     conditions:
       - base=master
-      - label=A:backport/all
+      - label=backport/all
     actions:
       backport:
         branches:
@@ -19,7 +19,7 @@ pull_request_rules:
   - name: Backport patches to the release/v0.17.x branch
     conditions:
       - base=master
-      - label=A:backport/v0.17.x
+      - label=backport/v0.17.x
     actions:
       backport:
         branches:
@@ -28,7 +28,7 @@ pull_request_rules:
   - name: Backport patches to the release/v0.18.x branch
     conditions:
       - base=master
-      - label=A:backport/v0.18.x
+      - label=backport/v0.18.x
     actions:
       backport:
         branches:
