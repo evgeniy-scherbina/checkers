@@ -17,6 +17,7 @@ import (
 )
 
 // NEW FEATURE
+// NEW FEATURE 2
 
 const (
 	alice = testutil.Alice
