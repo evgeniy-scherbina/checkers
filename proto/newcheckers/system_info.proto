@@ -1,0 +1,9 @@
+syntax = "proto3";
+package alice.checkers.newcheckers;
+
+option go_package = "github.com/alice/checkers/x/newcheckers/types";
+
+message SystemInfo {
+  uint64 nextId = 1; 
+  
+}

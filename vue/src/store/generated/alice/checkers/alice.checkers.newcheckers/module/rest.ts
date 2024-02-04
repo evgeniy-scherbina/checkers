@@ -14,6 +14,15 @@
  */
 export type CheckersnewcheckersParams = object;
 
+export interface CheckersnewcheckersSystemInfo {
+  /** @format uint64 */
+  nextId?: string;
+}
+
+export interface NewcheckersQueryGetSystemInfoResponse {
+  SystemInfo?: CheckersnewcheckersSystemInfo;
+}
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */
@@ -240,6 +249,22 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
   queryParams = (params: RequestParams = {}) =>
     this.request<NewcheckersQueryParamsResponse, RpcStatus>({
       path: `/alice/checkers/newcheckers/params`,
+      method: "GET",
+      format: "json",
+      ...params,
+    });
+
+  /**
+   * No description
+   *
+   * @tags Query
+   * @name QuerySystemInfo
+   * @summary Queries a SystemInfo by index.
+   * @request GET:/alice/checkers/newcheckers/system_info
+   */
+  querySystemInfo = (params: RequestParams = {}) =>
+    this.request<NewcheckersQueryGetSystemInfoResponse, RpcStatus>({
+      path: `/alice/checkers/newcheckers/system_info`,
       method: "GET",
       format: "json",
       ...params,
