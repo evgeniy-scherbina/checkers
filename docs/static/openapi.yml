@@ -859,6 +859,42 @@ paths:
                   additionalProperties: {}
       tags:
         - Query
+  /alice/checkers/newcheckers/system_info:
+    get:
+      summary: Queries a SystemInfo by index.
+      operationId: AliceCheckersNewcheckersSystemInfo
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            type: object
+            properties:
+              SystemInfo:
+                type: object
+                properties:
+                  nextId:
+                    type: string
+                    format: uint64
+        default:
+          description: An unexpected error response.
+          schema:
+            type: object
+            properties:
+              code:
+                type: integer
+                format: int32
+              message:
+                type: string
+              details:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    '@type':
+                      type: string
+                  additionalProperties: {}
+      tags:
+        - Query
   /alice/checkers/oddnum/params:
     get:
       summary: Parameters queries the parameters of the module.
@@ -31724,6 +31760,15 @@ definitions:
   alice.checkers.newcheckers.Params:
     type: object
     description: Params defines the parameters for the module.
+  alice.checkers.newcheckers.QueryGetSystemInfoResponse:
+    type: object
+    properties:
+      SystemInfo:
+        type: object
+        properties:
+          nextId:
+            type: string
+            format: uint64
   alice.checkers.newcheckers.QueryParamsResponse:
     type: object
     properties:
@@ -31731,6 +31776,12 @@ definitions:
         description: params holds all the parameters of this module.
         type: object
     description: QueryParamsResponse is response type for the Query/Params RPC method.
+  alice.checkers.newcheckers.SystemInfo:
+    type: object
+    properties:
+      nextId:
+        type: string
+        format: uint64
   alice.checkers.oddnum.MsgCreateGameResponse:
     type: object
     properties:
