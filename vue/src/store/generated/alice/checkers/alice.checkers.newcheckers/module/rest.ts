@@ -14,6 +14,8 @@
  */
 export type CheckersnewcheckersParams = object;
 
+export type NewcheckersMsgCreatePostResponse = object;
+
 /**
  * QueryParamsResponse is response type for the Query/Params RPC method.
  */

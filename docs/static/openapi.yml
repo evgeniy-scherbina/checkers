@@ -31721,6 +31721,8 @@ definitions:
       nextId:
         type: string
         format: uint64
+  alice.checkers.newcheckers.MsgCreatePostResponse:
+    type: object
   alice.checkers.newcheckers.Params:
     type: object
     description: Params defines the parameters for the module.
