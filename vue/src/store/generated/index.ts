@@ -3,6 +3,7 @@
 import AliceCheckersAliceCheckersBiggernum from './alice/checkers/alice.checkers.biggernum'
 import AliceCheckersAliceCheckersCheckers from './alice/checkers/alice.checkers.checkers'
 import AliceCheckersAliceCheckersLessernum from './alice/checkers/alice.checkers.lessernum'
+import AliceCheckersAliceCheckersNewcheckers from './alice/checkers/alice.checkers.newcheckers'
 import AliceCheckersAliceCheckersOddnum from './alice/checkers/alice.checkers.oddnum'
 import AliceCheckersAliceCheckersSum from './alice/checkers/alice.checkers.sum'
 import AliceCheckersAliceCheckersTictactoe from './alice/checkers/alice.checkers.tictactoe'
@@ -32,6 +33,7 @@ export default {
   AliceCheckersAliceCheckersBiggernum: load(AliceCheckersAliceCheckersBiggernum, 'alice.checkers.biggernum'),
   AliceCheckersAliceCheckersCheckers: load(AliceCheckersAliceCheckersCheckers, 'alice.checkers.checkers'),
   AliceCheckersAliceCheckersLessernum: load(AliceCheckersAliceCheckersLessernum, 'alice.checkers.lessernum'),
+  AliceCheckersAliceCheckersNewcheckers: load(AliceCheckersAliceCheckersNewcheckers, 'alice.checkers.newcheckers'),
   AliceCheckersAliceCheckersOddnum: load(AliceCheckersAliceCheckersOddnum, 'alice.checkers.oddnum'),
   AliceCheckersAliceCheckersSum: load(AliceCheckersAliceCheckersSum, 'alice.checkers.sum'),
   AliceCheckersAliceCheckersTictactoe: load(AliceCheckersAliceCheckersTictactoe, 'alice.checkers.tictactoe'),
