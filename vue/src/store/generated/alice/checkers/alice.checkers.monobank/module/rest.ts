@@ -11,6 +11,8 @@
 
 export interface CheckersmonobankBalance {
   address?: string;
+
+  /** @format uint64 */
   balance?: string;
 }
 
