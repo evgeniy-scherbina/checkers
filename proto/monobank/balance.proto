@@ -5,7 +5,7 @@ option go_package = "github.com/alice/checkers/x/monobank/types";
 
 message Balance {
   string address = 1; 
-  string balance = 2; 
+  uint64 balance = 2;
   
 }
 

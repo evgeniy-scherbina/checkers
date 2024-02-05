@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"github.com/spf13/cast"
 	"strconv"
 
 	"github.com/alice/checkers/x/monobank/types"
@@ -18,7 +19,10 @@ func CmdDeposit() *cobra.Command {
 		Short: "Broadcast message deposit",
 		Args:  cobra.ExactArgs(1),
 		RunE: func(cmd *cobra.Command, args []string) (err error) {
-			argAmount := args[0]
+			argAmount, err := cast.ToUint64E(args[0])
+			if err != nil {
+				return err
+			}
 
 			clientCtx, err := client.GetClientTxContext(cmd)
 			if err != nil {

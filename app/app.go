@@ -201,6 +201,7 @@ var (
 		checkersmoduletypes.ModuleName:  nil,
 		lessernummoduletypes.ModuleName: nil,
 		oddnummoduletypes.ModuleName:    nil,
+		monobankmoduletypes.ModuleName:  nil,
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 )
@@ -527,6 +528,7 @@ func NewApp(
 	newcheckersModule := newcheckersmodule.NewAppModule(appCodec, app.NewcheckersKeeper, app.AccountKeeper, app.BankKeeper)
 
 	app.MonobankKeeper = *monobankmodulekeeper.NewKeeper(
+		app.BankKeeper,
 		appCodec,
 		keys[monobankmoduletypes.StoreKey],
 		keys[monobankmoduletypes.MemStoreKey],

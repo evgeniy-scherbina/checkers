@@ -4,6 +4,7 @@ import (
 	"testing"
 
 	"github.com/alice/checkers/x/monobank/keeper"
+	"github.com/alice/checkers/x/monobank/testutil"
 	"github.com/alice/checkers/x/monobank/types"
 	"github.com/cosmos/cosmos-sdk/codec"
 	codectypes "github.com/cosmos/cosmos-sdk/codec/types"
@@ -18,6 +19,10 @@ import (
 )
 
 func MonobankKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
+	return MonobankKeeperWithMocks(t, nil)
+}
+
+func MonobankKeeperWithMocks(t testing.TB, bank *testutil.MockBankEscrowKeeper) (*keeper.Keeper, sdk.Context) {
 	storeKey := sdk.NewKVStoreKey(types.StoreKey)
 	memStoreKey := storetypes.NewMemoryStoreKey(types.MemStoreKey)
 
@@ -37,6 +42,7 @@ func MonobankKeeper(t testing.TB) (*keeper.Keeper, sdk.Context) {
 		"MonobankParams",
 	)
 	k := keeper.NewKeeper(
+		bank,
 		cdc,
 		storeKey,
 		memStoreKey,

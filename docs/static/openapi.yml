@@ -842,6 +842,7 @@ paths:
                       type: string
                     balance:
                       type: string
+                      format: uint64
               pagination:
                 type: object
                 properties:
@@ -963,6 +964,7 @@ paths:
                     type: string
                   balance:
                     type: string
+                    format: uint64
         default:
           description: An unexpected error response.
           schema:
@@ -32142,6 +32144,7 @@ definitions:
         type: string
       balance:
         type: string
+        format: uint64
   alice.checkers.monobank.MsgDepositResponse:
     type: object
   alice.checkers.monobank.Params:
@@ -32159,6 +32162,7 @@ definitions:
               type: string
             balance:
               type: string
+              format: uint64
       pagination:
         type: object
         properties:
@@ -32194,6 +32198,7 @@ definitions:
             type: string
           balance:
             type: string
+            format: uint64
   alice.checkers.monobank.QueryParamsResponse:
     type: object
     properties:
