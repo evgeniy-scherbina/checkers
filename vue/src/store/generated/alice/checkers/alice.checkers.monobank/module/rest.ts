@@ -23,6 +23,8 @@ export type CheckersmonobankParams = object;
 
 export type MonobankMsgDepositResponse = object;
 
+export type MonobankMsgWithdrawResponse = object;
+
 export interface MonobankQueryAllBalanceResponse {
   balance?: CheckersmonobankBalance[];
 

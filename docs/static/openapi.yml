@@ -32147,6 +32147,8 @@ definitions:
         format: uint64
   alice.checkers.monobank.MsgDepositResponse:
     type: object
+  alice.checkers.monobank.MsgWithdrawResponse:
+    type: object
   alice.checkers.monobank.Params:
     type: object
     description: Params defines the parameters for the module.
