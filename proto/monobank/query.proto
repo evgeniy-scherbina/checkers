@@ -5,6 +5,7 @@ import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "monobank/params.proto";
+import "monobank/balance.proto";
 // this line is used by starport scaffolding # 1
 
 option go_package = "github.com/alice/checkers/x/monobank/types";
@@ -15,7 +16,17 @@ service Query {
   rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/alice/checkers/monobank/params";
   }
-  // this line is used by starport scaffolding # 2
+  // Queries a Balance by index.
+	rpc Balance(QueryGetBalanceRequest) returns (QueryGetBalanceResponse) {
+		option (google.api.http).get = "/alice/checkers/monobank/balance/{address}";
+	}
+
+	// Queries a list of Balance items.
+	rpc BalanceAll(QueryAllBalanceRequest) returns (QueryAllBalanceResponse) {
+		option (google.api.http).get = "/alice/checkers/monobank/balance";
+	}
+
+// this line is used by starport scaffolding # 2
 }
 
 // QueryParamsRequest is request type for the Query/Params RPC method.
@@ -25,6 +36,24 @@ message QueryParamsRequest {}
 message QueryParamsResponse {
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryGetBalanceRequest {
+	  string address = 1;
+
+}
+
+message QueryGetBalanceResponse {
+	Balance balance = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllBalanceRequest {
+	cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllBalanceResponse {
+	repeated Balance balance = 1 [(gogoproto.nullable) = false];
+	cosmos.base.query.v1beta1.PageResponse pagination = 2;
 }
 
 // this line is used by starport scaffolding # 3
