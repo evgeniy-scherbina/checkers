@@ -31,7 +31,6 @@ func (k msgServer) Deposit(goCtx context.Context, msg *types.MsgDeposit) (*types
 	}
 
 	balance.Balance += msg.Amount
-
 	k.SetBalance(ctx, balance)
 
 	return &types.MsgDepositResponse{}, nil
