@@ -3,6 +3,7 @@ package alice.checkers.monobank;
 
 import "gogoproto/gogo.proto";
 import "monobank/params.proto";
+import "monobank/balance.proto";
 // this line is used by starport scaffolding # genesis/proto/import
 
 option go_package = "github.com/alice/checkers/x/monobank/types";
@@ -10,5 +11,6 @@ option go_package = "github.com/alice/checkers/x/monobank/types";
 // GenesisState defines the monobank module's genesis state.
 message GenesisState {
   Params params = 1 [(gogoproto.nullable) = false];
+  repeated Balance balanceList = 2 [(gogoproto.nullable) = false];
   // this line is used by starport scaffolding # genesis/proto/state
 }
