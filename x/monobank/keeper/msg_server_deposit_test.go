@@ -25,10 +25,33 @@ func TestDepositAPI(t *testing.T) {
 	bankMock.EXPECT().
 		SendCoinsFromAccountToModule(ctx, aliceAddr, types.ModuleName, testutil.CoinsOf(1)).
 		AnyTimes()
+	bankMock.EXPECT().
+		SendCoinsFromAccountToModule(ctx, aliceAddr, types.ModuleName, testutil.CoinsOf(2)).
+		AnyTimes()
 
-	_, err = msgServer.Deposit(goCtx, &types.MsgDeposit{
-		Creator: testutil.Alice,
-		Amount:  1,
-	})
-	require.NoError(t, err)
+	// Deposit 1 token
+	{
+		_, err = msgServer.Deposit(goCtx, &types.MsgDeposit{
+			Creator: testutil.Alice,
+			Amount:  1,
+		})
+		require.NoError(t, err)
+
+		balance, found := k.GetBalance(ctx, testutil.Alice)
+		require.True(t, found)
+		require.Equal(t, uint64(1), balance.Balance)
+	}
+
+	// Deposit 2 more tokens
+	{
+		_, err = msgServer.Deposit(goCtx, &types.MsgDeposit{
+			Creator: testutil.Alice,
+			Amount:  2,
+		})
+		require.NoError(t, err)
+
+		balance, found := k.GetBalance(ctx, testutil.Alice)
+		require.True(t, found)
+		require.Equal(t, uint64(3), balance.Balance)
+	}
 }
