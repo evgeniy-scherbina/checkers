@@ -13,7 +13,7 @@ func (escrow *MockBankEscrowKeeper) ExpectAny(context context.Context) {
 	escrow.EXPECT().SendCoinsFromModuleToAccount(sdk.UnwrapSDKContext(context), gomock.Any(), gomock.Any(), gomock.Any()).AnyTimes()
 }
 
-func coinsOf(amount uint64) sdk.Coins {
+func CoinsOf(amount uint64) sdk.Coins {
 	return sdk.Coins{
 		sdk.Coin{
 			Denom:  sdk.DefaultBondDenom,
@@ -27,7 +27,7 @@ func (escrow *MockBankEscrowKeeper) ExpectDeposit(context context.Context, who s
 	if err != nil {
 		panic(err)
 	}
-	return escrow.EXPECT().SendCoinsFromAccountToModule(sdk.UnwrapSDKContext(context), whoAddr, types.ModuleName, coinsOf(amount))
+	return escrow.EXPECT().SendCoinsFromAccountToModule(sdk.UnwrapSDKContext(context), whoAddr, types.ModuleName, CoinsOf(amount))
 }
 
 func (escrow *MockBankEscrowKeeper) ExpectWithdraw(context context.Context, who string, amount uint64) *gomock.Call {
@@ -35,5 +35,5 @@ func (escrow *MockBankEscrowKeeper) ExpectWithdraw(context context.Context, who 
 	if err != nil {
 		panic(err)
 	}
-	return escrow.EXPECT().SendCoinsFromModuleToAccount(sdk.UnwrapSDKContext(context), types.ModuleName, whoAddr, coinsOf(amount))
+	return escrow.EXPECT().SendCoinsFromModuleToAccount(sdk.UnwrapSDKContext(context), types.ModuleName, whoAddr, CoinsOf(amount))
 }

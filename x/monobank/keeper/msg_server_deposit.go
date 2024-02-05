@@ -2,6 +2,7 @@ package keeper
 
 import (
 	"context"
+	"github.com/alice/checkers/x/monobank/testutil"
 	"github.com/alice/checkers/x/monobank/types"
 	sdk "github.com/cosmos/cosmos-sdk/types"
 )
@@ -16,7 +17,7 @@ func (k msgServer) Deposit(goCtx context.Context, msg *types.MsgDeposit) (*types
 	if err != nil {
 		return nil, err
 	}
-	err = k.bank.SendCoinsFromAccountToModule(ctx, depositor, types.ModuleName, coinsOf(msg.Amount))
+	err = k.bank.SendCoinsFromAccountToModule(ctx, depositor, types.ModuleName, testutil.CoinsOf(msg.Amount))
 	if err != nil {
 		return nil, err
 	}
@@ -34,13 +35,4 @@ func (k msgServer) Deposit(goCtx context.Context, msg *types.MsgDeposit) (*types
 	k.SetBalance(ctx, balance)
 
 	return &types.MsgDepositResponse{}, nil
-}
-
-func coinsOf(amount uint64) sdk.Coins {
-	return sdk.Coins{
-		sdk.Coin{
-			Denom:  sdk.DefaultBondDenom,
-			Amount: sdk.NewInt(int64(amount)),
-		},
-	}
 }
